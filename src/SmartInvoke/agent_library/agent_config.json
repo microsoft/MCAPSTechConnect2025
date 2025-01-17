@@ -1,0 +1,249 @@
+{
+  "version": "1.0",
+  "last_updated": "2024-06-26",
+  "agents": {
+    "HRPolicyAgent": {
+      "module": "agents",
+      "class": "DynamicAgent",
+      "AgentName": "HRPolicyAgent",
+      "AgentDescription": "This agent is designed specifically to address a wide range of queries related to Human Resources policies and guidelines. It is equipped to provide detailed information on HR-specific topics such as the holiday calendar, leave policies, employee benefits, payroll details, and employee conduct guidelines. By offering comprehensive support in these areas, the agent ensures that employees have quick access to accurate HR-related information, helping them navigate company policies efficiently and enhancing their overall workplace experience.",
+      "service_url": "https://dmo-sc-hrinsight.azurewebsites.net/api/HRInsightService",
+      "authentication": {
+        "type": "Managed Identity",
+        "key_vault_secret_name": "HRPolicyAgentkey"
+      },
+      "request_template": {
+        "QueryType": "PolicyQuery",
+        "Description": "This query type is used to request specific information about HR policies, such as leave policies. It is designed to provide detailed explanations regarding company guidelines and requires a relevant query to be passed.",
+        "Query": "Provide details of the leave policy.",
+        "Language": "English"
+      },
+      "required_fields": ["QueryType", "Query", "Language"]
+    },
+    "ProcurementContractAgent": {
+      "module": "agents",
+      "class": "DynamicAgent",
+      "AgentName": "ProcurementContractAgent",
+      "AgentDescription": "This agent is designed to handle various queries related to procurement contracts. It provides detailed information about specific contracts, including key clauses, summaries, and analyses of contract terms and conditions. The agent assists in understanding contract obligations, termination clauses, payment terms, price details, and potential risks. By offering thorough and accurate contract-related insights, it helps streamline the procurement process and ensures compliance with industry best practices.",
+      "service_url": "https://dmo-sc-contractinsight.azurewebsites.net/api/ContractInsightService",
+      "authentication": {
+        "type": "Managed Identity",
+        "key_vault_secret_name": "ProcurementContractAgentkey"
+      },
+      "request_template":  [
+        {
+          "QueryType": "ContractDocumentQuery",
+          "Description": "This query type is used to query specific information about a particular contract. This query type requires ContractNumber to be passed.",
+          "ContractNumber": "7069154",
+          "Query": "What are the key clauses for this contract?",
+          "Language": "English",
+          "required_fields": ["QueryType", "ContractNumber", "Query", "Language"]
+        },
+        {
+          "QueryType": "ContractDocumentSummary",
+          "Description": "This query type provides a summary of a specific contract. It requires the ContractNumber to be specified.",
+          "ContractNumber": "895275",
+          "Query": "Provide the summary of the contract?",
+          "Language": "English",
+          "required_fields": ["QueryType", "ContractNumber", "Query", "Language"]
+        },
+        {
+          "QueryType": "ContractDocumentAnalysis",
+          "Description": "This query type analyzes a specific contract to provide insights into key terms, obligations, and potential risks. A ContractNumber must be provided.",
+          "ContractNumber": "7981676",
+          "Query": "Analyse this contract and provide insight into the key terms and conditions, clauses, obligations, termination clauses, payment terms, price details and contracting parties details. Also highlight if any clauses deviates from industry best practices or are risky to Microsoft?",
+          "Language": "English",
+          "required_fields": ["QueryType", "Query", "Language", "ContractNumber"]
+        },
+        {
+          "QueryType": "CompareContractDocument",
+          "Description": "This query type compares multiple contracts and analyzes their key clauses. It requires ContractNumbers and CompareQuestion to be specified.",
+          "ContractNumbers": "32154;48912",
+          "LimitComparisiontoSpecificClause": "false",
+          "Query": "Analyse this contract and provide insight into the key terms and conditions, clauses, obligations, termination clauses, payment terms, price details and contracting parties details.",
+          "CompareQuestion": "As an expert in procurement contract analysis, conduct an in-depth comparison of the provided contracts.",
+          "Language": "English",
+          "required_fields": ["QueryType", "Query", "Language", "ContractNumbers", "LimitComparisiontoSpecificClause", "CompareQuestion"]
+        },
+        {
+          "QueryType": "CompareContractDocument",
+          "Description": "This query type compares specific clauses from multiple contracts. It requires ContractNumbers and Clause details.",
+          "ContractNumbers": "32154;48912",
+          "LimitComparisiontoSpecificClause": "true",
+          "ClausestoCompare": "'order of precedence';'payment terms'",
+          "Query": "Act as Procurement Contract Analysis Expert, thoroughly examine the contract and provide a comprehensive detailed analysis of the order of precedence clause and payment terms from the following contract contents.",
+          "CompareQuestion": "As an expert in procurement contract analysis, compare the order of precedence clause and payment terms between the below contracts.",
+          "Language": "English",
+          "required_fields": ["QueryType", "Query", "Language", "ContractNumbers", "LimitComparisiontoSpecificClause", "CompareQuestion", "ClausestoCompare"]
+        }
+      ]
+    },
+    "JurisinsightAgent": {  
+      "module": "agents",  
+      "class": "DynamicAgent",  
+      "AgentName": "JurisinsightAgent",  
+      "AgentDescription": "This agent integrates with internal systems to retrieve judgment documents using the judgment ID as a parameter and generates concise legal headnotes that summarize key legal issues and court rulings. Additionally, it handles Q&A sessions on judgments, providing accurate answers to specific queries regarding the case, legal principles, or outcomes.",  
+      "service_url": "https://dmo-sc-judiciaryinsight.azurewebsites.net/api/JudiciaryInsightService",  
+      "authentication": {  
+          "type": "Managed Identity",
+          "key_vault_secret_name": "JurisinsightAgentKey"  
+      },  
+      "request_template": [  
+        {  
+              "QueryType": "fetchJudgementid",  
+              "Query": "Find the Judgementid of Central Bureau of Investigation vs. A Raja & Ors judgement",  
+              "Language": "English",  
+              "required_fields": ["QueryType",  "Query", "Language"]  
+          },
+          {  
+              "QueryType": "HeadnoteGeneration",  
+              "JudgementId": "ASD6151",  
+              "Query": "create the headnote for the judgment with ID ASD6151.",  
+              "Language": "English",  
+              "required_fields": ["QueryType", "JudgementId", "Query", "Language"]  
+          }  ,
+          {  
+              "QueryType": "LegalQ&A",  
+              "JudgementId": "2024SC001",  
+              "Query": "What are key issues and finding in judgementid 2024SC001.",  
+              "Language": "English",  
+              "required_fields": ["QueryType", "JudgementId", "Query", "Language"]  
+          }  ,
+          {  
+              "QueryType": "LegalAnalysis",  
+              "JudgementId": "2024SC009",  
+              "Query": "What are the implication of grant of appeal.",  
+              "Language": "English",  
+              "required_fields": ["QueryType", "JudgementId", "Query", "Language"]  
+          }  
+      ]  
+    },
+    "ProcurementSpendDataAgent": {  
+      "module": "agents",  
+      "class": "DynamicAgent",  
+      "AgentName": "ProcurementSpendDataAgent",  
+      "AgentDescription": "This agent helps you query spend data related to procurement activities. It provides insights into procurement spend patterns, supplier performance, and cost-saving opportunities. By analyzing procurement spend data, the agent enables data-driven decision-making and helps optimize procurement processes.",
+      "service_url": "https://dmo-sc-spendinsight.azurewebsites.net/api/SpendInsightService",  
+      "authentication": {  
+          "type": "Managed Identity",
+          "key_vault_secret_name": "ProcurmentSpendDataAgentKey"  
+      },  
+      "request_template": [  
+          {  
+              "QueryType": "SQLQuery",   
+              "Query": "find most recent 5 contracts with supplier number 0003024134?",  
+              "Language": "English",  
+              "required_fields": ["QueryType", "Query", "Language"]  
+          } ,
+          {  
+              "QueryType": "SQLQuery",   
+              "Query": "Can you provide the detail of Purchase Order number 0099899466 ?",  
+              "Language": "English",  
+              "required_fields": ["QueryType", "Query", "Language"]  
+          } ,
+          {  
+              "QueryType": "SQLQuery",   
+              "Query": "What is the total spend per country for FY23?",  
+              "Language": "English",  
+              "required_fields": ["QueryType", "Query", "Language"]  
+          },
+          {  
+              "QueryType": "SQLQuery",   
+              "Query": "What are the top 5 standard Category  with highest spend For FY23?",  
+              "Language": "English",  
+              "required_fields": ["QueryType", "Query", "Language"]  
+          } 
+      ]  
+    }, 
+    "RnDPatentAgent": {  
+      "module": "agents",  
+      "class": "DynamicAgent",  
+      "AgentName": "RnDPatentAgent",  
+      "AgentDescription": "This agent helps you query the information from the patents filed by research and development department (RnD Department).",  
+      "service_url": "https://dmo-sc-rndinsight.azurewebsites.net/api/RnDInsightService",  
+      "authentication": {  
+          "type": "Managed Identity",
+          "key_vault_secret_name": "RnDAgentKey"  
+      },  
+      "request_template": [  
+          {  
+              "QueryType": "RnDQuery",   
+              "Query": "What are the regulations concerning batteries and waste batteries mentioned in the patent repository",  
+              "Language": "English",  
+              "required_fields": ["QueryType", "Query", "Language"]  
+          } 
+      ]  
+    }, 
+    "ManufactoringMaintainanceAgent": {  
+      "module": "agents",  
+      "class": "DynamicAgent",  
+      "AgentName": "ManufactoringMaintainanceAgent",  
+      "AgentDescription": "The Maintenance AI Agent is designed to assist engineers on the plant floor by providing prompt answers to a variety of maintenance-related queries. It can identify probable causes and corrective measures for equipment faults, analyze recurring issues, track equipment downtime, and provide information on common issues and specific equipment like the Exhaust Air Purification - TAR Incinerator.",  
+      "service_url": "https://dmo-sc-manufacturinginsight.azurewebsites.net/api/ManufacturingInsightService",  
+      "authentication": {  
+          "type": "Managed Identity",
+          "key_vault_secret_name": "MnFAgentKey"  
+      },  
+      "request_template": [  
+          {  
+              "QueryType": "Manufacturing",   
+              "Query": "What are the most common equipment issues reported?",  
+              "Language": "English",  
+              "required_fields": ["QueryType", "Query", "Language"]  
+          } 
+      ]  
+    }, 
+    "ProcurementSupplierProfileAgent": {  
+      "module": "agents",  
+      "class": "DynamicAgent",  
+      "AgentName": "ProcurementSupplierProfileAgent",  
+      "AgentDescription": "The ProcurementSupplierProfileAgent is a specialized AI-driven agent designed to retrieve, compare, and provide detailed profiles of suppliers within a procurement system. It processes supplier IDs and returns relevant data, including supplier qualifications, performance history, compliance status, and other key metrics. It can handle both individual profile inquiries and comparisons between multiple suppliers to assist procurement professionals in making informed decisions.",  
+      "service_url": "https://dmo-sc-supplierinsight.azurewebsites.net/api/SupplierProfileService",  
+      "authentication": {  
+          "type": "Managed Identity",
+          "key_vault_secret_name": "ProcurementSupplierProfileAgentkey"  
+      },  
+      "request_template": [  
+          {  
+              "QueryType": "SupplierProfile",   
+              "Query": "provide the profile for supplier 644646?",  
+              "Supplierid": "644646",
+              "Language": "English",  
+              "required_fields": ["QueryType", "Query","Supplierid", "Language"]  
+          },
+          {  
+            "QueryType": "SupplierProfileComparision",   
+            "Query": "compare the profiles for suppliers 2048423 and 2048424?",  
+            "Supplierids": "2048423;2048424",
+            "Language": "English",  
+            "required_fields": ["QueryType", "Query","Supplierids", "Language"]  
+        } 
+      ]  
+    }, 
+    "UserProxyAgent": {
+      "module": "agents",
+      "class": "InteractiveAgent",
+      "AgentName": "UserProxyAgent",
+      "AgentDescription": "This agent is responsible for interacting with the user to gather additional information between steps. It is utilized when the execution plan requires user input to proceed to the next step.",
+
+      "request_template": [
+        {
+          "ActionType": "UserInteraction",
+          "UserMessage": "<<replace with user friendly message>>",
+          "MessageType": "Text",
+          "Language": "English",
+          "required_fields": ["ActionType", "UserMessage", "Language"]
+        }
+      ]
+    }
+  },
+    
+  "retry": {
+    "max_retries": 3,
+    "backoff_factor": 2
+  },
+  "cache": {
+    "enabled": true,
+    "ttl": 300
+  }
+}

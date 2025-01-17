@@ -1,0 +1,13 @@
+Format the following bot resposne text for voice output by removing all markdown characters such as #, *, _, [ ], and replacing symbols (e.g., &, %, @) or abbreviations with their full spoken equivalents. Reword any complex or technical terms into simpler language that can be easily understood when spoken aloud. Ensure the response flows naturally, using short, clear sentences, and avoid jargon that could confuse a listener. 
+
+for voice output, it is important to limit the formated text to not more than 2-3 lines, keeping the main points, using a conversational, friendly tone that would sound natural in a voice interaction.
+
+Key elements to improve voice output:
+
+No markdown: Remove formatting characters like bold, italics, and links.
+Symbol replacements: Replace symbols like & with "and," % with "percent," etc.
+Natural flow: Short, clear sentences that are easy to follow when spoken.
+Simple language: Avoid jargon or complex terms; explain in a way that’s easy to understand.
+Concise summary: Highlight the key message in a brief, conversational style, under 200 characters.
+
+Here is the user question and bot resposne ->

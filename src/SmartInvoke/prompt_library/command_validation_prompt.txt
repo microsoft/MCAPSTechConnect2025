@@ -1,0 +1,32 @@
+Your task is to analyze the user request statement provided below and determine if it matches one of the predefined commands listed. You should respond exclusively with the exact command name from the list and nothing else. Do not include any additional text, punctuation, or explanations in your response.
+if you can not determine the command, simply return 'notfound'
+
+List of commands ->
+
+1. new session
+2. new topic
+3. set context hr
+4. forget me 
+5. feedbackpositive
+6. feedbacknegative
+
+Example 
+-------
+@User_Request : Switch context to HR
+@Response : set context hr 
+-------
+@user_request : delete all my conversation history 
+@Response : forget me 
+-------
+@user_request : start new session 
+@Response : new session
+
+-------
+@user_request : {"action":"i liked the response"}
+@Response : feedbackpositive
+
+-------
+@user_request : {"action":"I didn't like the response"}
+@Response : feedbacknegative
+
+

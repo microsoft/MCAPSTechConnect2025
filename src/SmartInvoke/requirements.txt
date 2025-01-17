@@ -1,0 +1,17 @@
+# DO NOT include azure-functions-worker in this file
+# The Python Worker is managed by Azure Functions platform
+# Manually managing azure-functions-worker may cause unexpected issues
+
+azure-functions
+aiohttp
+redis
+openai
+circuitbreaker
+tabulate
+tenacity
+pydantic
+aiofiles
+azure-identity
+azure-keyvault-secrets
+msgraph-sdk
+tiktoken

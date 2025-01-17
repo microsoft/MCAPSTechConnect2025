@@ -1,0 +1,242 @@
+{
+    "name": "automotiveindex",
+    "defaultScoringProfile": null,
+    "fields": [
+      {
+        "name": "DocumentId",
+        "type": "Edm.String",
+        "searchable": true,
+        "filterable": true,
+        "retrievable": true,
+        "stored": true,
+        "sortable": true,
+        "facetable": false,
+        "key": false
+      },
+      {
+        "name": "Title",
+        "type": "Edm.String",
+        "searchable": true,
+        "filterable": true,
+        "retrievable": true,
+        "stored": true,
+        "sortable": true,
+        "facetable": false,
+        "key": false
+      },
+      {
+        "name": "FileUrl",
+        "type": "Edm.String",
+        "searchable": true,
+        "filterable": true,
+        "retrievable": true,
+        "stored": true,
+        "sortable": true,
+        "facetable": false,
+        "key": false,
+        "analyzer": "standard.lucene"
+      },
+      {
+        "name": "IsImagePresent",
+        "type": "Edm.Boolean",
+        "searchable": false,
+        "filterable": true,
+        "retrievable": true,
+        "stored": true,
+        "sortable": true,
+        "facetable": false,
+        "key": false
+      },
+      {
+        "name": "Content",
+        "type": "Edm.String",
+        "searchable": true,
+        "filterable": false,
+        "retrievable": true,
+        "stored": true,
+        "sortable": false,
+        "facetable": false,
+        "key": false,
+        "analyzer": "en.microsoft"
+      },
+      {
+        "name": "DocumentChunkId",
+        "type": "Edm.String",
+        "searchable": true,
+        "filterable": true,
+        "retrievable": true,
+        "stored": true,
+        "sortable": true,
+        "facetable": false,
+        "key": true
+      },
+      {
+        "name": "ContentType",
+        "type": "Edm.String",
+        "searchable": true,
+        "filterable": true,
+        "retrievable": true,
+        "stored": true,
+        "sortable": true,
+        "facetable": true,
+        "key": false
+      },
+      {
+        "name": "FileName",
+        "type": "Edm.String",
+        "searchable": true,
+        "filterable": true,
+        "retrievable": true,
+        "stored": true,
+        "sortable": true,
+        "facetable": false,
+        "key": false,
+        "analyzer": "standard.lucene"
+      },
+      {
+        "name": "TitleVector",
+        "type": "Collection(Edm.Single)",
+        "searchable": true,
+        "filterable": false,
+        "retrievable": true,
+        "stored": true,
+        "sortable": false,
+        "facetable": false,
+        "key": false,
+        "dimensions": 3072,
+        "vectorSearchProfile": "vector-profile"
+      },
+      {
+        "name": "ContentVector",
+        "type": "Collection(Edm.Single)",
+        "searchable": true,
+        "filterable": false,
+        "retrievable": true,
+        "stored": true,
+        "sortable": false,
+        "facetable": false,
+        "key": false,
+        "dimensions": 3072,
+        "vectorSearchProfile": "vector-profile"
+      },
+      {
+        "name": "PageNumber",
+        "type": "Edm.String",
+        "searchable": true,
+        "filterable": true,
+        "retrievable": true,
+        "stored": true,
+        "sortable": true,
+        "facetable": false,
+        "key": false,
+        "analyzer": "standard.lucene"
+      },
+      {
+        "name": "SequenceId",
+        "type": "Edm.Int64",
+        "searchable": false,
+        "filterable": true,
+        "retrievable": true,
+        "stored": true,
+        "sortable": true,
+        "facetable": false,
+        "key": false
+      },
+      {
+        "name": "keyword",
+        "type": "Edm.String",
+        "searchable": true,
+        "filterable": true,
+        "retrievable": true,
+        "stored": true,
+        "sortable": true,
+        "facetable": true,
+        "key": false,
+        "analyzer": "standard.lucene"
+      },
+      {
+        "name": "ModelName",
+        "type": "Edm.String",
+        "searchable": true,
+        "filterable": true,
+        "retrievable": true,
+        "stored": true,
+        "sortable": true,
+        "facetable": false,
+        "key": false,
+        "analyzer": "standard.lucene"
+      },
+      {
+        "name": "DocumentType",
+        "type": "Edm.String",
+        "searchable": true,
+        "filterable": true,
+        "retrievable": true,
+        "stored": true,
+        "sortable": true,
+        "facetable": false,
+        "key": false,
+        "analyzer": "standard.lucene"
+      },
+      {
+        "name": "IsTechnologyDocument",
+        "type": "Edm.Boolean",
+        "searchable": false,
+        "filterable": true,
+        "retrievable": true,
+        "stored": true,
+        "sortable": true,
+        "facetable": false,
+        "key": false
+      },
+      {
+        "name": "DealerName",
+        "type": "Edm.String",
+        "searchable": true,
+        "filterable": true,
+        "retrievable": true,
+        "stored": true,
+        "sortable": true,
+        "facetable": false,
+        "key": false,
+        "analyzer": "standard.lucene"
+      }
+    ],
+    "semantic": {
+      "configurations": [
+        {
+          "name": "sementicprofileconfig",
+          "prioritizedFields": {
+            "titleField": {
+              "fieldName": "Title"
+            },
+            "prioritizedContentFields": [
+              {
+                "fieldName": "Content"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "vectorSearch": {
+      "algorithms": [
+        {
+          "name": "vector-config",
+          "kind": "hnsw",
+          "hnswParameters": {
+            "metric": "cosine",
+            "m": 4,
+            "efConstruction": 400,
+            "efSearch": 500
+          }
+        }
+      ],
+      "profiles": [
+        {
+          "name": "vector-profile",
+          "algorithm": "vector-config"
+        }
+      ]
+    }
+  }
