@@ -17,7 +17,9 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     - name: Debug - List Files
       run: |
+            echo "Current directory:"
             pwd
+            echo "Files and directories:"
             ls -R
     # Step 2: Deploy Infrastructure using Bicep
     - name: Deploy Infrastructure
