@@ -1,0 +1,13 @@
+{
+    "scriptFile": "__init__.py",
+    "bindings": [
+      {
+        "authLevel": "function",
+        "type": "blobTrigger",
+        "direction": "in",
+        "name": "myblob",
+        "path": "contentingestion",
+        "connection": "coresaconn"
+      }
+    ]
+  }

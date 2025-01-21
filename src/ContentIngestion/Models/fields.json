@@ -1,0 +1,23 @@
+{
+  "document_types": {
+    "techconnect": {
+      "fields":{
+        "DocumentId": "str",
+        "Title": "str",
+        "Content": "str",
+        "DocumentChunkId": "str",
+        "ContentType": "str",
+        "FileName": "str",
+        "FileUrl": "str",
+        "TitleVector": "List",
+        "ContentVector": "List",
+        "PageNumber": "str",
+        "SequenceId": "int",
+        "IsImagePresent": "bool",
+        "ModelName": "str",
+        "DocumentType": "str",
+        "keyword":"str"
+      }
+    }
+  }
+}

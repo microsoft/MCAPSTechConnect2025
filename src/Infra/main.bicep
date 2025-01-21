@@ -21,6 +21,7 @@ resource functionAppPlan 'Microsoft.Web/serverfarms@2022-03-01' = {
     tier: 'Dynamic'
     name: 'Y1'
   }
+  
   properties: {
     reserved: true
   }
