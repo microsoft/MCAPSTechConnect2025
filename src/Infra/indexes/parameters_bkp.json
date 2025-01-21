@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "functionAppName": { "value": "techconnect20250109funcapp" },
+    "aiServiceName": { "value": "techconnect2025_ais" },
+    "openAIName": { "value": "techconnect2025_aoai" },
+    "redisName": { "value": "techconnect20250105redis" },
+    "appInsightsName": { "value": "techconnect20250105appinsg" },
+    "keyVaultName": { "value": "techconnect20250105kv" },
+    "storageAccName":{"value": "tech20250109stgacc"},
+    "searchServicename":{"value": "tech20250109search"},
+    "webappname":{"value": "tech20250109webapp"},
+    "botserviceName":{"value": "tech20250109botsvc"},
+    "msaid":{"value": ""}
+  }
+}
