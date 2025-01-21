@@ -8,7 +8,7 @@
     "redisName": { "value": "techconnect20250105redis" },
     "appInsightsName": { "value": "techconnect20250105appinsg" },
     "keyVaultName": { "value": "techconnect20250105kv" },
-    "storageAccName":{"value": "tech20250109stgacc"},
+    "storageAccName":{"value": "tech20250109stgacc2101"},
     "searchServicename":{"value": "tech20250109search"},
     "webappname":{"value": "tech20250109webapp"},
     "botserviceName":{"value": "tech20250109botsvc"},
