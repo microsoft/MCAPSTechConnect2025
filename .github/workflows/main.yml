@@ -17,12 +17,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     - name: Checkout Repository
       uses: actions/checkout@v3
-    - name: Debug - List Files
-      run: |
-            echo "Current directory:"
-            pwd
-            echo "Files and directories:"
-            ls -R
+    
     # Step 2: Deploy Infrastructure using Bicep
     - name: Deploy Infrastructure
       run: |
