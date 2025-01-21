@@ -15,7 +15,10 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-
+    - name: Debug - List Files
+      run: |
+            pwd
+            ls -R
     # Step 2: Deploy Infrastructure using Bicep
     - name: Deploy Infrastructure
       run: |
