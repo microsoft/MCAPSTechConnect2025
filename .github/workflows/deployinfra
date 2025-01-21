@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 6: Deploy Infrastructure using Bicep
+    # Step 1: Deploy Infrastructure using Bicep
     - name: Deploy Infrastructure
       uses: azure/cli-action@v1
       with:
@@ -19,6 +19,6 @@ jobs:
             --password ${{ secrets.AZURE_CLIENT_SECRET }} \
             --tenant ${{ secrets.AZURE_TENANT_ID }}
           az deployment group create \
-            --resource-group '<RESOURCE_GROUP_NAME>' \
+            --resource-group ${{ secrets.RESOURCE_GROUP_NAME }} \
             --template-file src/Infra/main.bicep \
             --parameters @src/Infra/parameters.json
