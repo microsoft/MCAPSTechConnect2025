@@ -3,61 +3,23 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Trigger pipeline on push to the main branch
+      - main  # Trigger pipeline on push to main branch
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout the code
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    # Step 2: Set up Python environment
-    - name: Set up Python
-      uses: actions/setup-python@v4
+    # Step 1: Log in to Azure
+    - name: Log in to Azure
+      uses: azure/login@v1
       with:
-        python-version: '3.9'
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    # Step 3: Install dependencies
-    - name: Install dependencies for ContentIngestion
-      run: |
-        cd src/ContentIngestion
-        pip install -r requirements.txt
-        cd ../../
-
-    - name: Install dependencies for SmartInvoke
-      run: |
-        cd src/SmartInvoke
-        pip install -r requirements.txt
-        cd ../../
-
-    # Step 4: Deploy ContentIngestion to Azure Function App
-    - name: Deploy ContentIngestion
-      uses: azure/functions-action@v1
-      with:
-        app-name: 'ContentIngestionApp' # Replace with your function app name
-        slot-name: 'production'
-        publish-profile: ${{ secrets.CONTENT_INGESTION_PROFILE }}
-
-    # Step 5: Deploy SmartInvoke to Azure Function App
-    - name: Deploy SmartInvoke
-      uses: azure/functions-action@v1
-      with:
-        app-name: 'SmartInvokeApp' # Replace with your function app name
-        slot-name: 'production'
-        publish-profile: ${{ secrets.SMART_INVOKE_PROFILE }}
-
-    # Step 6: Deploy Infrastructure using Bicep
+    # Step 2: Deploy Infrastructure using Bicep
     - name: Deploy Infrastructure
-      uses: azure/cli-action@v1
-      with:
-        inlineScript: |
-          az login --service-principal --username ${{ secrets.AZURE_CLIENT_ID }} \
-            --password ${{ secrets.AZURE_CLIENT_SECRET }} \
-            --tenant ${{ secrets.AZURE_TENANT_ID }}
-          az deployment group create \
-            --resource-group '<RESOURCE_GROUP_NAME>' \
-            --template-file src/Infra/main.bicep \
-            --parameters @src/Infra/parameters.json
+      run: |
+        az deployment group create \
+          --resource-group ${{ secrets.RESOURCE_GROUP }} \
+          --template-file src/Infra/main.bicep \
+          --parameters @src/Infra/parameters.json
