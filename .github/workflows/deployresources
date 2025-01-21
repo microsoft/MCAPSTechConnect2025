@@ -1,0 +1,50 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Trigger pipeline on push to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Python environment
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    # Step 3: Install dependencies
+    - name: Install dependencies for ContentIngestion
+      run: |
+        cd src/ContentIngestion
+        pip install -r requirements.txt
+        cd ../../
+
+    - name: Install dependencies for SmartInvoke
+      run: |
+        cd src/SmartInvoke
+        pip install -r requirements.txt
+        cd ../../
+
+    # Step 4: Deploy ContentIngestion to Azure Function App
+    - name: Deploy ContentIngestion
+      uses: azure/functions-action@v1
+      with:
+        app-name: 'ContentIngestionApp' # Replace with your function app name
+        slot-name: 'production'
+        publish-profile: ${{ secrets.CONTENT_INGESTION_PROFILE }}
+
+    # Step 5: Deploy SmartInvoke to Azure Function App
+    - name: Deploy SmartInvoke
+      uses: azure/functions-action@v1
+      with:
+        app-name: 'SmartInvokeApp' # Replace with your function app name
+        slot-name: 'production'
+        publish-profile: ${{ secrets.SMART_INVOKE_PROFILE }}
