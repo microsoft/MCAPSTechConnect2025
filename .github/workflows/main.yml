@@ -21,6 +21,6 @@ jobs:
       run: |
         az deployment group create \
           --resource-group ${{ secrets.RESOURCE_GROUP_NAME }} \
-          --template-file src/Infra/main.bicep \
-          --parameters @src/Infra/parameters.json
+          --template-file MCAPSTechConnect2025/src/Infra/main.bicep \
+          --parameters MCAPSTechConnect2025/@src/Infra/parameters.json
           
