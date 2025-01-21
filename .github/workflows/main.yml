@@ -20,6 +20,6 @@ jobs:
     - name: Deploy Infrastructure
       run: |
         az deployment group create \
-          --resource-group ${{ secrets.RESOURCE_GROUP }} \
+          --resource-group ${{ secrets.RESOURCE_GROUP_NAME }} \
           --template-file src/Infra/main.bicep \
           --parameters @src/Infra/parameters.json
