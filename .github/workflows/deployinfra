@@ -3,22 +3,23 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Trigger pipeline to deploy infrastructure
+      - main  # Trigger pipeline on push to main branch
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Deploy Infrastructure using Bicep
-    - name: Deploy Infrastructure
-      uses: azure/cli-action@v1
+    # Step 1: Log in to Azure
+    - name: Log in to Azure
+      uses: azure/login@v1
       with:
-        inlineScript: |
-          az login --service-principal --username ${{ secrets.AZURE_CLIENT_ID }} \
-            --password ${{ secrets.AZURE_CLIENT_SECRET }} \
-            --tenant ${{ secrets.AZURE_TENANT_ID }}
-          az deployment group create \
-            --resource-group ${{ secrets.RESOURCE_GROUP_NAME }} \
-            --template-file src/Infra/main.bicep \
-            --parameters @src/Infra/parameters.json
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    # Step 2: Deploy Infrastructure using Bicep
+    - name: Deploy Infrastructure
+      run: |
+        az deployment group create \
+          --resource-group ${{ secrets.RESOURCE_GROUP }} \
+          --template-file src/Infra/main.bicep \
+          --parameters @src/Infra/parameters.json
