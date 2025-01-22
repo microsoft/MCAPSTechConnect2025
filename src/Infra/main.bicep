@@ -84,15 +84,15 @@ resource functionApps 'Microsoft.Web/sites@2022-03-01' = [for i in range(0, 4): 
 }]
 
  // RBAC Role Assignment for Function App to access Key Vault
- resource keyVaultAccessRoleAssignments 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = [for i in range(0, 4): {
-   name: guid(keyVault.id, 'KeyVaultAccess', functionApps[i].id)
-   scope: keyVault
-   properties: {
-     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'b86a8fe4-44ce-4948-aee5-eccb2c155cd7') // Key Vault Secrets User role
-     principalId: functionApps[i].identity.principalId
-     principalType: 'ServicePrincipal'
-   }
- }]
+// resource keyVaultAccessRoleAssignments 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = [for i in range(0, 4): {
+ //  name: guid(keyVault.id, 'KeyVaultAccess', functionApps[i].id)
+  // scope: keyVault
+  // properties: {
+  //   roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'b86a8fe4-44ce-4948-aee5-eccb2c155cd7') // Key Vault Secrets User role
+  //   principalId: functionApps[i].identity.principalId
+   //  principalType: 'ServicePrincipal'
+   //}
+ //}]
 
 // Web App
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
