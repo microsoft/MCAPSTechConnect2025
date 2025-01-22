@@ -24,7 +24,7 @@ resource functionAppPlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   location: location
   sku: {
     tier: 'Dynamic'
-    name: 'Y1'
+    name: 'EP1'
   }
   properties: {
     reserved: true
