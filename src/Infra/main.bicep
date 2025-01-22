@@ -221,64 +221,64 @@ resource botService 'Microsoft.BotService/botServices@2023-09-15-preview' = {
 
 // Secret object
 var secretsObject = {
-  secrets: [
-    {
-      secretName:  'OPENAI_API_KEY'
-      secretValue: '1'
-    }
-    {
-      secretName:  'OPENAI_API_BASE'
-      secretValue: 'https://${openAIName}.openai.azure.com/'
-    }
-    {
-      secretName:  'OPENAI_API_VERSION'
-      secretValue: 'gpt4o'
-    }
-    {
-      secretName:  'GPT_DEPLOYMENT_NAME'
-      secretValue: 'gpt-4o'
-    }
-    {
-      secretName:  'MODULE_NAME'
-      secretValue:  'Query-Orchestrator'
-    }
-    {
-      secretName:  'USE_CACHE'
-      secretValue:  false
-    }
-    {
-      secretName:  'CACHE_TYPE'
-      secretValue:  'redis'
-    }
-    {
-      secretName:  'REDIS_HOST'
-      secretValue: '1'
-    }
-    {
-      secretName:  'REDIS_PASSWORD'
-      secretValue:  '1'
-    }
-    {
-      secretName:  'HR_INSIGHT_SERVICE_URL'
-      secretValue:  'https://${functionAppNames[2]}.azurewebsites.net/'
-    }
-    {
-      secretName:   'WORKDAY_SERVICE_URL'
-      secretValue:  'https://${functionAppNames[3]}.azurewebsites.net/'
-    }
-  ]
-}
+//   secrets: [
+//     {
+//       secretName:  'OPENAI_API_KEY'
+//       secretValue: '1'
+//     }
+//     {
+//       secretName:  'OPENAI_API_BASE'
+//       secretValue: 'https://${openAIName}.openai.azure.com/'
+//     }
+//     {
+//       secretName:  'OPENAI_API_VERSION'
+//       secretValue: 'gpt4o'
+//     }
+//     {
+//       secretName:  'GPT_DEPLOYMENT_NAME'
+//       secretValue: 'gpt-4o'
+//     }
+//     {
+//       secretName:  'MODULE_NAME'
+//       secretValue:  'Query-Orchestrator'
+//     }
+//     {
+//       secretName:  'USE_CACHE'
+//       secretValue:  false
+//     }
+//     {
+//       secretName:  'CACHE_TYPE'
+//       secretValue:  'redis'
+//     }
+//     {
+//       secretName:  'REDIS_HOST'
+//       secretValue: '1'
+//     }
+//     {
+//       secretName:  'REDIS_PASSWORD'
+//       secretValue:  '1'
+//     }
+//     {
+//       secretName:  'HR_INSIGHT_SERVICE_URL'
+//       secretValue:  'https://${functionAppNames[2]}.azurewebsites.net/'
+//     }
+//     {
+//       secretName:   'WORKDAY_SERVICE_URL'
+//       secretValue:  'https://${functionAppNames[3]}.azurewebsites.net/'
+//     }
+//   ]
+// }
 
-module kvSaSecretsModuleResource './keyVaultSecrets.bicep' = {
-  name: 'kvSaSecertsDeploy'
-  params: {
-    secretsObject: secretsObject
-    kvResourceName: keyVaultName
-  }
-  dependsOn: [
-    keyVault
-  ]
-}
+//module kvSaSecretsModuleResource './keyVaultSecrets.bicep' = {
+ // name: 'kvSaSecertsDeploy'
+  //params: {
+  ///  secretsObject: secretsObject
+   // kvResourceName: keyVaultName
+ // }
+  //dependsOn: [
+   // keyVault
+  //]
+//}
 
 
 output functionAppId string = functionApps[1].id
