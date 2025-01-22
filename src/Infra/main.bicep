@@ -141,7 +141,7 @@ resource redisCache 'Microsoft.Cache/Redis@2024-11-01' = {
   location: location
   properties: {
     sku: {
-      name: 'free'
+      name: 'basic'
       family: 'C'
       capacity: 1
     }
