@@ -5,14 +5,14 @@ param msaid string
 param prefixparam string
 var year = '2025'
 var month = '01'
-var day = '222'
+var day = '22'
 var prefix = '${prefixparam}${year}${month}${day}'
 
 var functionAppName = '${prefix}funcapp'
 var openAIName = '${prefix}_aoai'
 var redisName = '${prefix}redis'
 var appInsightsName = '${prefix}appinsg'
-var keyVaultName = '${prefix}kv'
+var keyVaultName = '${prefix}kv2'
 var storageAccName = '${prefix}stgacc'
 var searchServicename = '${prefix}search'
 var webappname = '${prefix}webapp'
