@@ -51,7 +51,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' = {
   properties: {
     sku: {
       family: 'A'
-      name: 'premium'
+      name: 'standard'
     }
     tenantId: subscription().tenantId
     accessPolicies: []
