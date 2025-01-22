@@ -5,7 +5,7 @@ param msaid string
 param prefixparam string
 var year = '2025'
 var month = '01'
-var day = '22'
+var day = '222'
 var prefix = '${prefixparam}${year}${month}${day}'
 
 var functionAppName = '${prefix}funcapp'
