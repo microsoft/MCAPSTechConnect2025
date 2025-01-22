@@ -1,0 +1,28 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - skumarmicrosoft-patch-1  # Trigger pipeline on push to main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Log in to Azure
+    - name: Log in to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+    
+    # Step 2: Deploy Infrastructure using Bicep
+    - name: Deploy Infrastructure
+      run: |
+        az deployment group create \
+          --resource-group ${{ secrets.RESOURCE_GROUP_NAME }} \
+          --template-file src/Infra/main.bicep \
+          --parameters @src/Infra/parameters.json
+          
