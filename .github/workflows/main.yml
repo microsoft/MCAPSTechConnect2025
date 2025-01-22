@@ -25,4 +25,5 @@ jobs:
           --resource-group ${{ secrets.RESOURCE_GROUP_NAME }} \
           --template-file src/Infra/main.bicep \
           --parameters @src/Infra/parameters.json
-          
+    - name: print parameter.sku.name
+            ${{properties.sku.name}}
