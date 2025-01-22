@@ -220,7 +220,7 @@ resource botService 'Microsoft.BotService/botServices@2023-09-15-preview' = {
 }
 
 // Secret object
-var secretsObject = {
+//var secretsObject = {
 //   secrets: [
 //     {
 //       secretName:  'OPENAI_API_KEY'
