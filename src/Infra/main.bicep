@@ -269,7 +269,7 @@ var secretsObject = {
   ]
 }
 
-module kvSaSecretsModuleResource './model/keyVaultSecrets.bicep' = {
+module kvSaSecretsModuleResource './keyVaultSecrets.bicep' = {
   name: 'kvSaSecertsDeploy'
   params: {
     secretsObject: secretsObject
