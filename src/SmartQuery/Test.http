@@ -1,0 +1,27 @@
+### Test 1: Request for Employee with First Name "Alice"
+GET http://localhost:7071/api/TechlabsDirectoryService?firstName=Alice
+
+###
+
+### Test 2: Request for Employee with First Name "Bob"
+GET http://localhost:7071/api/TechlabsDirectoryService?firstName=Bob
+
+###
+
+### Test 3: Request for Employee with First Name "Charlie"
+GET http://localhost:7071/api/TechlabsDirectoryService?firstName=Charlie
+
+###
+
+### Test 4: Request for Employee with First Name "David"
+GET http://localhost:7071/api/TechlabsDirectoryService?firstName=David
+
+###
+
+### Test 5: Request for Employee with First Name "NonExistent"
+GET http://localhost:7071/api/TechlabsDirectoryService?firstName=NonExistent
+
+###
+
+### Test 6: Request without providing a First Name
+GET http://localhost:7071/api/TechlabsDirectoryService
