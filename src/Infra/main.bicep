@@ -1,7 +1,7 @@
 // Main.bicep 
 param location string = resourceGroup().location
 //param location string = 'westus'
-param prefix string 
+param prefix string = '25012025'
 var functionAppName = '${prefix}funcapp'
 var openAIName = '${prefix}_aoai2'
 var redisName = '${prefix}redis'
