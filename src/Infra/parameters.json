@@ -2,6 +2,7 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
  "parameters": {
-    "prefixparam": { "value": "mcapstech20250211" }
+    "prefixparam": { "value": "mcapstech" },
+    "msaid":{"value": "4797f886-fae2-44a9-b250-979b1dafe302"}
   }
 }
