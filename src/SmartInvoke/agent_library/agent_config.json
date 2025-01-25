@@ -2,23 +2,25 @@
   "version": "1.0",
   "last_updated": "2024-06-26",
   "agents": {
-    "HRPolicyAgent": {
+    "TechLabsEmployeeRegistrationAgent": {
       "module": "agents",
       "class": "DynamicAgent",
-      "AgentName": "HRPolicyAgent",
-      "AgentDescription": "This agent is designed specifically to address a wide range of queries related to Human Resources policies and guidelines. It is equipped to provide detailed information on HR-specific topics such as the holiday calendar, leave policies, employee benefits, payroll details, and employee conduct guidelines. By offering comprehensive support in these areas, the agent ensures that employees have quick access to accurate HR-related information, helping them navigate company policies efficiently and enhancing their overall workplace experience.",
-      "service_url": "https://dmo-sc-hrinsight.azurewebsites.net/api/HRInsightService",
+      "AgentName": "TechLabsEmployeeRegistrationAgent",
+      "AgentDescription": "This agent is designed specifically to provide detailed employee information based on first name queries. It is equipped to fetch details of employees registered in the TechLabs program, including their full name, email, phone number, company, event name, and skills. By querying the first name of the employee, the agent can retrieve the corresponding employee's data to assist with registration and attendance queries. This agent enhances the experience for those attending TechLabs events, offering quick access to accurate and up-to-date employee information.",
+      "service_url": "https://tcagent1.azurewebsites.net/api/TechlabsDirectoryService",
       "authentication": {
-        "type": "Managed Identity",
-        "key_vault_secret_name": "HRPolicyAgentkey"
+        "type": "API Key",
+        "key_name": "TechLabsAPIKey",
+        "key_value": "<your-api-key>"
       },
       "request_template": {
-        "QueryType": "PolicyQuery",
-        "Description": "This query type is used to request specific information about HR policies, such as leave policies. It is designed to provide detailed explanations regarding company guidelines and requires a relevant query to be passed.",
-        "Query": "Provide details of the leave policy.",
+        "QueryType": "EmployeeQuery",
+        "Description": "This query is used to retrieve detailed information about a specific employee by their first name.?",
+        "Query": "Can you provide the details for the employee named Alice?",
+        "FirstName": "Alice",
         "Language": "English"
       },
-      "required_fields": ["QueryType", "Query", "Language"]
+      "required_fields": ["FirstName", "Language"]
     },
     "ProcurementContractAgent": {
       "module": "agents",

@@ -1,0 +1,37 @@
+### Test 1: Request for Employee with First Name "Alice"
+POST http://localhost:7072/api/TechlabsDirectoryService
+Content-Type: application/json
+
+{
+  "QueryType": "EmployeeQuery",
+  "Description": "This query is used to retrieve detailed information about a specific employee by their first name.",
+  "Query": "Can you provide the details for the employee named Alice?",
+  "FirstName": "Alice",
+  "Language": "English"
+}
+
+
+###
+
+### Test 2: Request for Employee with First Name "Bob"
+GET http://localhost:7072/api/TechlabsDirectoryService?firstName=Bob
+
+###
+
+### Test 3: Request for Employee with First Name "Charlie"
+GET http://localhost:7072/api/TechlabsDirectoryService?firstName=Charlie
+
+###
+
+### Test 4: Request for Employee with First Name "David"
+GET http://localhost:7072/api/TechlabsDirectoryService?firstName=David
+
+###
+
+### Test 5: Request for Employee with First Name "NonExistent"
+GET http://localhost:7072/api/TechlabsDirectoryService?firstName=NonExistent
+
+###
+
+### Test 6: Request without providing a First Name
+GET http://localhost:7072/api/TechlabsDirectoryService

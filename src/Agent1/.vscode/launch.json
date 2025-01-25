@@ -2,12 +2,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Attach to Python Functions",
+            "name": "Attach to Python Functions blobtrigger",
             "type": "python",
             "request": "attach",
-            "justMyCode": false,
             "port": 9091,
-            "preLaunchTask": "func: host start"
+            "preLaunchTask": "func: host start --port 7074"
         }
     ]
 }
+

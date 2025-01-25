@@ -9,15 +9,16 @@ class AppConfig(BaseAppConfig):
     
     @property  
     def OPENAI_API_BASE(self) -> str:  
-        return self.load_config_value('OPENAI_API_BASE', "")  
+        return self.load_config_value('OPENAI_API_BASE', "https://askai-openai-common.openai.azure.com/")  
   
     @property  
     def OPENAI_API_VERSION(self) -> str:  
-        return self.load_config_value('OPENAI_API_VERSION', "")  
+        return self.load_config_value('OPENAI_API_VERSION', "2024-04-01-preview")  
   
     @property  
     def GPT_DEPLOYMENT_NAME(self) -> str:  
-        return self.load_config_value('GPT_DEPLOYMENT_NAME', "gpt-4o")    
+        return self.load_config_value('GPT_DEPLOYMENT_NAME', "gpt-4o")   
+     
     @property
     def MODULE_NAME(self) -> str:
         return self.load_config_value('MODULE_NAME', "Smart-Invoker")
@@ -62,43 +63,6 @@ class AppConfig(BaseAppConfig):
     def USER_HISTORY_RETRIEVAL_LIMIT(self) -> int:  
         return int(self.load_config_value('USER_HISTORY_RETRIEVAL_LIMIT', 10))  
   
-    @property  
-    def HR_INSIGHT_SERVICE_URL(self) -> str:  
-        return self.load_config_value('HR_INSIGHT_SERVICE_URL', "http://localhost:9999/api/HRInsightService")  
-
-  
-    @property  
-    def HR_DOCUMENT_GENERATION_SERVICE_URL(self) -> str:  
-        return self.load_config_value('HR_DOCUMENT_GENERATION_SERVICE_URL', "http://localhost:5555/api/HRDocGen")  
-  
-    @property  
-    def COSMOS_ENDPOINT(self) -> str:  
-        return self.load_config_value('COSMOS_ENDPOINT', "")  
-  
-    @property  
-    def COSMOS_DB_NAME(self) -> str:  
-        return self.load_config_value('COSMOS_DB_NAME', "")  
-  
-    @property  
-    def COSMOS_CONTAINER_NAME(self) -> str:  
-        return self.load_config_value('COSMOS-ANALYTICS-CONTAINER-NAME', "")   
-  
-    @property
-    def AZURE_TENANT_ID(self) -> str:
-        return self.load_config_value('AZURE_TENANT_ID', "")
-    
-    @property
-    def USER_PROFILE_CLIENT_ID(self) -> str:
-        return self.load_config_value('USER_PROFILE_CLIENT_ID', "")
-    
-    @property
-    def USER_PROFILE_CLIENT_SECRET(self) -> str:
-        return self.load_config_value('USER_PROFILE_CLIENT_SECRET', "")
-    
-    @property
-    def INCLUDE_USER_PROFILE(self) -> bool:
-        return self.load_bool_config_value('INCLUDE_USER_PROFILE', False)
-    
     @property
     def GENERATE_QUERY_SUGGESTIONS(self) -> bool:
         return self.load_bool_config_value('GENERATE_QUERY_SUGGESTIONS', True)
@@ -106,11 +70,3 @@ class AppConfig(BaseAppConfig):
     @property
     def PROCESS_COMMANDS(self) -> bool:
         return self.load_bool_config_value('PROCESS_COMMANDS', True)
-
-    @property  
-    def TENANT_ID(self) -> str:  
-        return self.load_config_value('TENANT_ID', "")
-
-    @property  
-    def TENANT_CLIENTID(self) -> str:  
-        return self.load_config_value('TENANT_CLIENTID', "")   

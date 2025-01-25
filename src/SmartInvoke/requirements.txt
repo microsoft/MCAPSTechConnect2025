@@ -9,9 +9,12 @@ openai
 circuitbreaker
 tabulate
 tenacity
-pydantic
+fastapi==0.100.0
+uvicorn==0.22.0
+pydantic==1.10.9
 aiofiles
 azure-identity
 azure-keyvault-secrets
 msgraph-sdk
 tiktoken
+fastapi

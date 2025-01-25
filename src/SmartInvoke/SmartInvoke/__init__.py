@@ -104,10 +104,10 @@ def initialize_openai_utility(appconfig: AppConfig) -> OpenAIUtility:
         openai_api_base=appconfig.OPENAI_API_BASE,  
         openai_api_key=appconfig.OPENAI_API_KEY,  
         openai_api_version=appconfig.OPENAI_API_VERSION,
-        cosmos_endpoint=appconfig.COSMOS_ENDPOINT,
+        cosmos_endpoint=None,
         cosmos_key=None,
-        cosmos_container_name=appconfig.COSMOS_CONTAINER_NAME,
-        cosmos_database_name=appconfig.COSMOS_DB_NAME
+        cosmos_container_name=None,
+        cosmos_database_name=None
     )  
 
 

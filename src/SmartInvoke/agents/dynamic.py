@@ -5,7 +5,8 @@ from .agent import BaseAgent
 from Config import AppConfig
 from azure.identity import DefaultAzureCredential
 from azure.core.credentials import AccessToken
-  
+from common.functions import async_get_service_response
+ 
 class AuthTypeNotSupported(Exception):  
     pass  
   
@@ -61,15 +62,7 @@ class DynamicAgent(BaseAgent):
         request_data = await self.quote_values(request_data)  
         request_data = json.dumps(request_data)
 
-        # Generate token
-        tenant_id = appconfig.TENANT_ID
-        client_id =  appconfig.TENANT_CLIENTID
-        credential = DefaultAzureCredential(authority=f"https://login.microsoftonline.com/{tenant_id}")
-        token_request_context = [f"api://{client_id}/.default"]
-        token: AccessToken = credential.get_token(*token_request_context)
-        access_token = token.token
-        logging.info(f"Access Token generated for {self.service_url}")
-        response = await async_get_service_response(service_url, request_data, access_token)  
+        response = await async_get_service_response(service_url, request_data)  
   
         # Process any incoming messages  
         await self.process_messages()  

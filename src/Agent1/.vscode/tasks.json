@@ -3,8 +3,8 @@
     "tasks": [
         {
             "type": "func",
-            "label": "func: host start --port 7071",
-            "command": "host start --port 7071",
+            "label": "func: host start --port 7074",
+            "command": "host start --port 7074",
             "problemMatcher": "$func-python-watch",
             "isBackground": true,
             "dependsOn": "pip install (functions)"

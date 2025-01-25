@@ -2,8 +2,9 @@ POST http://localhost:7071/api/SmartInvoke
 Content-Type: application/json
 
 {
-  "Query": "compare the profiles for suppliers 10002 and 10003",
-  "Language": "English",
-  "UserId": "U0009",
-  "RequestId": "R0002"
+  "QueryType": "EmployeeQuery",
+  "Description": "This query is used to retrieve detailed information about a specific employee by their first name.?",
+  "Query": "Can you provide the details for the employee named Alice?",
+  "FirstName": "Alice",
+  "Language": "English"
 }
