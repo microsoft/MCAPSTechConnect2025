@@ -30,7 +30,42 @@ def get_employee_data_by_first_name(first_name: str):
             "attendance": "Yes",
             "registrationTimestamp": "2025-01-22T09:00:00Z"
         },
-        # Add more employee data here as needed...
+        "Emp3": {
+            "firstName": "Charlie",
+            "lastName": "Williams",
+            "email": "charlie.williams@org.com",
+            "phone": "+1234567893",
+            "company": "TechHive",
+            "eventId": "TL-2025-03",
+            "eventName": "TechLabs Workshop on Cybersecurity",
+            "skills": ["Networking", "Ethical Hacking", "Firewalls"],
+            "attendance": "No",
+            "registrationTimestamp": "2025-01-23T07:00:00Z"
+        },
+        "Emp4": {
+            "firstName": "David",
+            "lastName": "Brown",
+            "email": "david.brown@org.com",
+            "phone": "+1234567894",
+            "company": "DevWorks",
+            "eventId": "TL-2025-01",
+            "eventName": "TechLabs Workshop on Cloud Computing",
+            "skills": ["AWS", "Azure", "Docker"],
+            "attendance": "Yes",
+            "registrationTimestamp": "2025-01-20T11:00:00Z"
+        },
+        "Emp5": {
+            "firstName": "Eva",
+            "lastName": "Davis",
+            "email": "eva.davis@org.com",
+            "phone": "+1234567895",
+            "company": "CloudX",
+            "eventId": "TL-2025-02",
+            "eventName": "TechLabs Workshop on AI Development",
+            "skills": ["AI", "Neural Networks", "Python"],
+            "attendance": "Yes",
+            "registrationTimestamp": "2025-01-21T10:00:00Z"
+        }
     }
 
     # Find the employee data by first name

@@ -40,18 +40,8 @@ class DynamicAgent(BaseAgent):
         appconfig = AppConfig.get_instance()  
         auth_type = self.authentication.get('type')  
         context['auth_type'] = auth_type
-        access_token = None 
-
-        
-
         if auth_type == 'API Key':  
-            key_name = self.authentication.get('key_vault_secret_name')  
-            key_value = appconfig.fetch_secret_value_from_keyvault(key_name)  
-            if key_value is None:  
-                logging.info(f"Key {key_name} not found in key vault")  
-                service_url = self.service_url  
-            else:  
-                service_url = self.service_url + f'?code={key_value}'  
+            service_url = self.service_url  
         elif auth_type == 'Managed Identity':  
             context['ManagedIdentity'] = True  
             service_url = self.service_url 

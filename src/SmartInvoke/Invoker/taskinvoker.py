@@ -353,7 +353,6 @@ class SmartInvoker:
         """Handle the incoming request."""  
         try:  
             app_config = AppConfig.get_instance()  
-
             if app_config.PROCESS_COMMANDS:  
                 command_processing_result = await self.process_command()  
                 if command_processing_result:  
