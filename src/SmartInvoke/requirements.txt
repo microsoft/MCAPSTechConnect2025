@@ -11,7 +11,7 @@ tabulate
 tenacity
 fastapi==0.100.0
 uvicorn==0.22.0
-pydantic==1.10.9
+pydantic==1.10.13
 aiofiles
 azure-identity
 azure-keyvault-secrets
