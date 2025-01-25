@@ -1,4 +1,4 @@
-// Main.bicep
+// Main.bicep 
 param location string = resourceGroup().location
 //param location string = 'westus'
 param prefix string 
