@@ -110,6 +110,60 @@ Example 2:
     ]
 }
 
+Example 3:
+
+{
+    "ActionType": "Execute",
+    "ExecutePlan":[
+        {
+            "Step": 1,
+            "Agent name": "LeaveManagementAgent",
+            "Status Message": "Get & Show all the leavetypes to user for employee",
+            "Agent payload": {
+                "QueryType": "view_leave_types",
+                "Query":"show me the leave types applicable to me",
+                "Language": "English"
+            }
+        }
+    ]
+}
+
+Example 4:
+
+{
+    "ActionType": "Execute",
+    "ExecutePlan":[
+        {
+            "Step": 1,
+            "Agent name": "LeaveManagementAgent",
+            "Status Message": "Get & Show leave balance for the employee",
+            "Agent payload": {
+                "QueryType": "view_leave_balance",
+                "Query":"show me the leave balance for me",
+                "Language": "English"
+            }
+        }
+    ]
+}
+
+Example 5:
+
+{
+    "ActionType": "Execute",
+    "ExecutePlan":[
+        {
+            "Step": 1,
+            "Agent name": "LeaveManagementAgent",
+            "Status Message": "Apply leave for the employee",
+            "Agent payload": {
+                "QueryType": "apply_leave",
+                "Query":"Apply for casual leave from 2025-06-10 to 2025-06-15",
+                "Language": "English"
+            }
+        }
+    ]
+}
+
 
 ---------------------------------------
 When crafting your user massage such as in case of UserProxyAgent , ensure that it mirrors the communication style of a helpful representive. This means adopting a warm, friendly tone that resonates with the employee's needs and preferences. Add a personal touch by acknowledging the user's specific requests or concerns, and make the conversation feel personalized and attentive. Your goal is to make the user feel valued and understood, transforming the interaction into a positive and engaging experience.

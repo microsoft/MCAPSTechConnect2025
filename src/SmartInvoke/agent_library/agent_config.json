@@ -44,9 +44,61 @@
         "Language": "English"
       },
       "required_fields": ["DepartureCity", "ArrivalCity", "DepartureDate"]
+    },
+    "LeaveManagementAgent": {
+      "module": "agents",
+      "class": "DynamicAgent",
+      "AgentName": "LeaveManagementAgent",
+      "AgentDescription": "This agent is designed to handle employee leave management queries. It processes requests related to applying leave (apply_leave), leave balance (view_leave_balance), and leave types (view_leave_types) in the system. The leave type can be either Sick Leave or Casual Leave or Earned Leave or Maternity Leave",
+      "service_url": "http://localhost:7075/api/LeaveManagementService",
+      "authentication": {
+        "type": "API Key",
+        "key_name": "LeaveAPIKey",
+        "key_value": "<your-api-key>"
+      },
+      "request_templates": [
+        {
+          "QueryType": "apply_leave",
+          "Query": "Apply for casual leave from 2025-06-10 to 2025-06-15",
+          "EmployeeId": "EMP123",
+          "LeaveType": "Casual leave",
+          "StartDate": "2025-06-10",
+          "EndDate": "2025-06-15",
+          "Reason": "Family vacation",
+          "required_fields": ["EmployeeId", "LeaveType", "StartDate", "EndDate"]
+        },
+        {
+          "QueryType": "view_leave_balance",
+          "Query": "Can you check the leave balance for employee ID EMP456?",
+          "EmployeeId": "EMP456",
+          "required_fields": ["EmployeeId"]
+        },
+        {
+          "QueryType": "view_leave_types",
+          "Query": "What are the available leave types for employee ID EMP101?",
+          "EmployeeId": "EMP101",
+          "required_fields": ["EmployeeId"]
+        }
+      ]
+    },
+    "UserProxyAgent": {
+      "module": "agents",
+      "class": "InteractiveAgent",
+      "AgentName": "UserProxyAgent",
+      "AgentDescription": "This agent is responsible for interacting with the user to gather additional information between steps. It is utilized when the execution plan requires user input to proceed to the next step.",
+
+      "request_template": [
+        {
+          "ActionType": "UserInteraction",
+          "UserMessage": "<<replace with user friendly message>>",
+          "MessageType": "Text",
+          "Language": "English",
+          "required_fields": ["ActionType", "UserMessage", "Language"]
+        }
+      ]
     }
   },
-    
+
   "retry": {
     "max_retries": 3,
     "backoff_factor": 2

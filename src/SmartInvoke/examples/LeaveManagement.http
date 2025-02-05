@@ -1,0 +1,31 @@
+### 1. Apply for Leave
+POST http://localhost:7071/api/SmartInvoke
+Content-Type: application/json
+
+{
+  "Query": "Apply casual leave from 2025-06-10 to 2025-06-15",
+  "EmployeeId": "EMP123",
+  "Language": "English",
+  "UserId": "httptesting"
+}
+
+### 2. Check Leave Status
+POST http://localhost:7071/api/SmartInvoke
+Content-Type: application/json
+
+{
+  "Query": "Check my leave balance",
+  "EmployeeId": "EMP123",
+  "Language": "English",
+  "UserId": "httptesting"
+}
+
+### 3. View Leave Types
+POST http://localhost:7071/api/SmartInvoke
+
+{
+  "Query": "What are the types of leave available?",
+  "EmployeeId": "EMP123",
+  "Language": "English",
+  "UserId": "httptesting"
+}

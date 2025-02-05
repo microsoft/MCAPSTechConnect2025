@@ -1,0 +1,67 @@
+### Test 1: Request for Employee with First Name "Alice"
+POST http://localhost:7074/api/FlightAvailabilityCheckService
+Content-Type: application/json
+
+ {
+    "QueryType": "FlightAvailabilityQuery",
+    "Query": "Can you provide the available flights between New York and Los Angeles departing on 2025-03-10?",
+    "DepartureCity": "New York",
+    "ArrivalCity": "Los Angeles",
+    "DepartureDate": "2025-03-10",
+    "Language": "English"
+}
+
+### Test 2
+POST http://localhost:7074/api/FlightAvailabilityCheckService
+Content-Type: application/json
+
+{
+  "DepartureCity": "Miami",
+  "ArrivalCity": "Dallas",
+  "DepartureDate": "2025-03-14",
+  "ReturnDate": "2025-03-21"
+}
+
+### Test 3
+POST http://localhost:7074/api/FlightAvailabilityCheckService
+Content-Type: application/json
+
+{
+  "DepartureCity": "Austin",
+  "ArrivalCity": "Houston",
+  "DepartureDate": "2025-03-11",
+  "ReturnDate": "2025-03-18"
+}
+
+### Test 4
+POST http://localhost:7074/api/FlightAvailabilityCheckService
+Content-Type: application/json
+
+{
+  "DepartureCity": "London",
+  "ArrivalCity": "New York",
+  "DepartureDate": "2025-03-10",
+  "ReturnDate": "2025-03-17"
+}
+
+### Test 5
+POST http://localhost:7074/api/FlightAvailabilityCheckService
+Content-Type: application/json
+
+{
+  "DepartureCity": "Sydney",
+  "ArrivalCity": "Los Angeles",
+  "DepartureDate": "2025-03-09",
+  "ReturnDate": "2025-03-16"
+}
+
+### Test 6
+POST http://localhost:7074/api/FlightAvailabilityCheckService
+Content-Type: application/json
+
+{
+  "DepartureCity": "Paris",
+  "ArrivalCity": "New York",
+  "DepartureDate": "2025-03-13",
+  "ReturnDate": "2025-03-20"
+}

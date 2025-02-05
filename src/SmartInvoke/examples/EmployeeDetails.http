@@ -2,9 +2,9 @@ POST http://localhost:7071/api/SmartInvoke
 Content-Type: application/json
 
 {
-  "QueryType": "EmployeeQuery",
   "Description": "This query is used to retrieve detailed information about a specific employee by their first name.?",
   "Query": "Can you provide the details for the employee named Alice?",
   "FirstName": "Alice",
-  "Language": "English"
+  "Language": "English",
+  "UserId": "httptesting"
 }
