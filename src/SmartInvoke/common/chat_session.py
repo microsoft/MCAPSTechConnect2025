@@ -97,7 +97,8 @@ class ChatSession:
             else:
                 user_history = redis_cache.lrange(user_key, 0, -1)
 
-        user_history = [json.loads(entry) for entry in user_history]
+        if user_history is not None:
+            user_history = [json.loads(entry) for entry in user_history]
 
         return user_history
 

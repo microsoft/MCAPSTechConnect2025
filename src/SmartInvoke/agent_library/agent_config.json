@@ -7,7 +7,7 @@
       "class": "DynamicAgent",
       "AgentName": "TechLabsEmployeeRegistrationAgent",
       "AgentDescription": "This agent is designed specifically to provide detailed employee information based on first name queries. It is equipped to fetch details of employees registered in the TechLabs program, including their full name, email, phone number, company, event name, and skills. By querying the first name of the employee, the agent can retrieve the corresponding employee's data to assist with registration and attendance queries. This agent enhances the experience for those attending TechLabs events, offering quick access to accurate and up-to-date employee information.",
-      "service_url": "https://tcagent1.azurewebsites.net/api/TechlabsDirectoryService",
+      "service_url": "https://pagent1.azurewebsites.net/api/TechlabsDirectoryService",
       "authentication": {
         "type": "API Key",
         "key_name": "TechLabsAPIKey",
@@ -27,7 +27,7 @@
       "class": "DynamicAgent",
       "AgentName": "FlightAvailabilityCheckAgent",
       "AgentDescription": "This agent is specifically designed to provide detailed flight information based on the cities and dates provided in the query. It is capable of fetching available flights between the departure and arrival cities for the specified departure date, and optionally, the return date. The agent helps users check flight availability, flight numbers, departure times, return times, and prices for the specified travel route.",
-      "service_url": "https://tcagent2.azurewebsites.net/api/FlightAvailabilityCheckService",
+      "service_url": "https://pagent2.azurewebsites.net/api/FlightAvailabilityCheckService",
       "authentication": {
         "type": "API Key",
         "key_name": "FlightAPIKey",
@@ -50,7 +50,7 @@
       "class": "DynamicAgent",
       "AgentName": "LeaveManagementAgent",
       "AgentDescription": "This agent is designed to handle employee leave management queries. It processes requests related to applying leave (apply_leave), leave balance (view_leave_balance), and leave types (view_leave_types) in the system. The leave type can be either Sick Leave or Casual Leave or Earned Leave or Maternity Leave",
-      "service_url": "http://localhost:7075/api/LeaveManagementService",
+      "service_url": "https://pagent3.azurewebsites.net/api/LeaveManagementService",
       "authentication": {
         "type": "API Key",
         "key_name": "LeaveAPIKey",
