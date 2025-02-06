@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "AI Driven Query Orchestrator",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

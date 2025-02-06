@@ -69,4 +69,4 @@ class AppConfig(BaseAppConfig):
     
     @property
     def PROCESS_COMMANDS(self) -> bool:
-        return self.load_bool_config_value('PROCESS_COMMANDS', True)
+        return self.load_bool_config_value('PROCESS_COMMANDS', False)
