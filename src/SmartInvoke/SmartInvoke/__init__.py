@@ -1,3 +1,4 @@
+import asyncio
 import json  
 import os  
 import logging  
@@ -197,7 +198,7 @@ async def handle_request(Invoker: SmartInvoker, request: Dict[str, Any], request
         logging.exception('Error handling request')  
         return func.HttpResponse("Oops! Something went wrong while handling your request. Please try again", status_code=500) 
 
-async def refine_response(request_data, chatsession, openai_utility, query_response):
+async def refine_response(request_data, chatsession : ChatSession, openai_utility, query_response):
     try:
         messages = [
         {"role": "user", "content": query_response}
@@ -232,6 +233,8 @@ async def enhance_response(origional_question: str,response:str,chat_history :st
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": f"User Query:{origional_question}'### Bot Response:{response}"}
         ]
+        logging.info(f'Waiting for few seconds to avoid too many requests')
+        await asyncio.sleep(5)
         result = await openai_utility.generate_completion(prompt= prompt,gpt_deployment_name= app_config.GPT_DEPLOYMENT_NAME,ai_assistant=app_config.MODULE_NAME,conversation_id=request_data.RequestId, max_token=4048 , request_id = request_data.RequestId)  
         
         return result

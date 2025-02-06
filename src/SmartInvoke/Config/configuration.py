@@ -9,7 +9,7 @@ class AppConfig(BaseAppConfig):
     
     @property  
     def OPENAI_API_BASE(self) -> str:  
-        return self.load_config_value('OPENAI_API_BASE', "https://askai-openai-common.openai.azure.com/")  
+        return self.load_config_value('OPENAI_API_BASE', "https://westus.api.cognitive.microsoft.com/")  
   
     @property  
     def OPENAI_API_VERSION(self) -> str:  
@@ -69,4 +69,4 @@ class AppConfig(BaseAppConfig):
     
     @property
     def PROCESS_COMMANDS(self) -> bool:
-        return self.load_bool_config_value('PROCESS_COMMANDS', True)
+        return self.load_bool_config_value('PROCESS_COMMANDS', False)

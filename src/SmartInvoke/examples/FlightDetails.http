@@ -1,0 +1,10 @@
+POST http://localhost:7071/api/SmartInvoke
+Content-Type: application/json
+
+{
+  "Description": "This query is used to retrieve available flight details based on departure and arrival cities, as well as departure and optional return dates.",
+  "Query": "Can you provide the available flights between Chicago and San Francisco departing on 2025-03-12?",
+  "Language": "English",
+  "UserId": "httptesting",
+  "IsShowPlanOnly": true
+}

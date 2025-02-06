@@ -1,0 +1,107 @@
+[
+    {
+      "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
+      "value": "",
+      "slotSetting": false
+    },
+    {
+      "name": "AZURE_KEY_VAULT_URL",
+      "value": "",
+      "slotSetting": false
+    },
+    {
+      "name": "AzureWebJobsStorage",
+      "value": "",
+      "slotSetting": false
+    },
+    {
+      "name": "BUILD_FLAGS",
+      "value": "UseExpressBuild",
+      "slotSetting": false
+    },
+    {
+      "name": "CACHE_TYPE",
+      "value": "redis",
+      "slotSetting": false
+    },
+    {
+      "name": "ENABLE_ORYX_BUILD",
+      "value": "true",
+      "slotSetting": false
+    },
+    {
+      "name": "FUNCTIONS_EXTENSION_VERSION",
+      "value": "~4",
+      "slotSetting": false
+    },
+    {
+      "name": "FUNCTIONS_WORKER_RUNTIME",
+      "value": "python",
+      "slotSetting": false
+    },
+    {
+      "name": "GPT_35_TURBO",
+      "value": "gpt-35-turbo",
+      "slotSetting": false
+    },
+    {
+      "name": "GPT_DEPLOYMENT_NAME",
+      "value": "gpt-4o",
+      "slotSetting": false
+    },
+    {
+      "name": "GPT-4",
+      "value": "gpt-4o",
+      "slotSetting": false
+    },
+    {
+      "name": "OPENAI_API_BASE",
+      "value": "",
+      "slotSetting": false
+    },
+    {
+      "name": "OPENAI_API_KEY",
+      "value": "",
+      "slotSetting": false
+    },
+    {
+      "name": "OPENAI_API_VERSION",
+      "value": "2024-06-01",
+      "slotSetting": false
+    },
+    {
+      "name": "PROCESS_COMMANDS",
+      "value": "False",
+      "slotSetting": false
+    },
+    {
+      "name": "REDIS_HOST",
+      "value": "",
+      "slotSetting": false
+    },
+    {
+      "name": "REDIS_PASSWORD",
+      "value": "",
+      "slotSetting": false
+    },
+    {
+      "name": "SCM_DO_BUILD_DURING_DEPLOYMENT",
+      "value": "1",
+      "slotSetting": false
+    },
+    {
+      "name": "USE_CACHE",
+      "value": "False",
+      "slotSetting": false
+    },
+    {
+      "name": "USE_HISTORY",
+      "value": "False",
+      "slotSetting": false
+    },
+    {
+      "name": "XDG_CACHE_HOME",
+      "value": "/tmp/.cache",
+      "slotSetting": false
+    }
+  ]

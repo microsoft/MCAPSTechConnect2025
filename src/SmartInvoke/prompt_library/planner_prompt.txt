@@ -110,6 +110,151 @@ Example 2:
     ]
 }
 
+Example 3:
+
+{
+    "ActionType": "Execute",
+    "ExecutePlan":[
+        {
+            "Step": 1,
+            "Agent name": "UserProxyAgent",
+            "Status Message": "📝 Please provide the EmployeeId.",
+            "Agent payload": {
+                "ActionType": "UserInteraction",
+                "UserMessage": "Could you please provide your EmployeeId for your query?",
+                "MessageType": "Text",
+                "Language": "English"
+            }
+        },
+        {
+            "Step": 2,
+            "Agent name": "LeaveManagementAgent",
+            "Status Message": "Get & Show all the leavetypes to user for employee",
+            "Agent payload": {
+                "QueryType": "view_leave_types",
+                "EmployeeId": "EMP123",
+                "Query":"show me the leave types applicable to me",
+                "Language": "English"
+            },
+            "dependency": [
+                {
+                    "dependency_parameter": "EmployeeId",
+                    "dependency_step": 1
+                }
+            ]
+        }
+    ]
+}
+
+Example 4:
+
+{
+    "ActionType": "Execute",
+    "ExecutePlan":[
+        {
+            "Step": 1,
+            "Agent name": "UserProxyAgent",
+            "Status Message": "📝 Please provide the EmployeeId.",
+            "Agent payload": {
+                "ActionType": "UserInteraction",
+                "UserMessage": "Could you please provide your EmployeeId for your query?",
+                "MessageType": "Text",
+                "Language": "English"
+            }
+        },
+        {
+            "Step": 2,
+            "Agent name": "LeaveManagementAgent",
+            "Status Message": "Get & Show leave balance for the employee",
+            "Agent payload": {
+                "QueryType": "view_leave_balance",
+                "EmployeeId": "EMP123",
+                "Query":"show me the leave balance for me",
+                "Language": "English"
+            },
+            "dependency": [
+                {
+                    "dependency_parameter": "EmployeeId",
+                    "dependency_step": 1
+                }
+            ]
+        }
+    ]
+}
+
+Example 5:
+
+{
+    "ActionType": "Execute",
+    "ExecutePlan":[
+        {
+            "Step": 1,
+            "Agent name": "UserProxyAgent",
+            "Status Message": "📝 Please provide the EmployeeId.",
+            "Agent payload": {
+                "ActionType": "UserInteraction",
+                "UserMessage": "Could you please provide your EmployeeId for your query?",
+                "MessageType": "Text",
+                "Language": "English"
+            }
+        },
+        {
+            "Step": 2,
+            "Agent name": "UserProxyAgent",
+            "Status Message": "📝 Please select the leave type.",
+            "Agent payload": {
+                "ActionType": "UserInteraction",
+                "UserMessage": "Could you please provide leave type for your query?",
+                "MessageType": "Text",
+                "Language": "English"
+            },
+            "dependency": [
+                {
+                    "dependency_parameter": "EmployeeId",
+                    "dependency_step": 1
+                }
+            ]
+        },
+        {
+            "Step": 3,
+            "Agent name": "UserProxyAgent",
+            "Status Message": "📝 Please provide start & end date.",
+            "Agent payload": {
+                "ActionType": "UserInteraction",
+                "UserMessage": "Could you please provide start & end date for your query?",
+                "MessageType": "Text",
+                "Language": "English"
+            },
+            "dependency": [
+                {
+                    "dependency_parameter": ["EmployeeId", "LeaveType"]
+                    "dependency_step": 2
+                }
+            ]
+        },
+        {
+            "Step": 2,
+            "Agent name": "LeaveManagementAgent",
+            "Status Message": "Apply leave for the employee",
+            "Agent payload": {
+                "QueryType": "apply_leave",
+                "EmployeeId": "EMP123",
+                "LeaveType": "<<provided leave type>>" // Placeholder for user-provided leave type
+                "StartDate": "<<provided start date>>" // Placeholder for start date
+                "EndDate": "<<provided end date>>" // Placeholder for end date
+                "Query":"Apply for casual leave from 2025-06-10 to 2025-06-15",
+                "Language": "English"
+            },
+            "dependency": [
+                {
+                    "dependency_parameter": ["EmployeeId", "LeaveType", "StartDate", "EndDate"],
+                    "dependency_step": 3
+                }
+            ]
+        }
+    ]
+}
+
 
 ---------------------------------------
 When crafting your user massage such as in case of UserProxyAgent , ensure that it mirrors the communication style of a helpful representive. This means adopting a warm, friendly tone that resonates with the employee's needs and preferences. Add a personal touch by acknowledging the user's specific requests or concerns, and make the conversation feel personalized and attentive. Your goal is to make the user feel valued and understood, transforming the interaction into a positive and engaging experience.

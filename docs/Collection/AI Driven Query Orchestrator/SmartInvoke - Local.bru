@@ -1,0 +1,26 @@
+meta {
+  name: SmartInvoke - Local
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:7071/api/SmartInvoke
+  body: json
+  auth: none
+}
+
+headers {
+  content-type: application/json
+  user-agent: vscode-restclient
+}
+
+body:json {
+  {
+    "Description": "This query is used to retrieve available flight details based on departure and arrival cities, as well as departure and optional return dates.",
+    "Query": "Can you provide the available flights between Chicago and San Francisco departing on 2025-03-12?",
+    "Language": "English",
+    "UserId": "httptesting",
+    "IsShowPlanOnly": true
+  }
+}

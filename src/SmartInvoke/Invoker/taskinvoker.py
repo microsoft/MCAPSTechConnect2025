@@ -218,7 +218,7 @@ class SmartInvoker:
             {"role": "user", "content": self.query}  
         ]  
 
-        result = await self.openai_utility.generate_completion(prompt= messages,gpt_deployment_name= app_config.GPT_DEPLOYMENT_NAME,ai_assistant=app_config.MODULE_NAME,conversation_id=self.request_id , request_id = self.request_id)  
+        result = await self.openai_utility.generate_completion_json_format(prompt= messages,gpt_deployment_name= app_config.GPT_DEPLOYMENT_NAME,ai_assistant=app_config.MODULE_NAME,conversation_id=self.request_id , request_id = self.request_id)  
         logging.info(result)
         try:
             json_data = parse_responsejson(result)  
