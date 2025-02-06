@@ -1,0 +1,276 @@
+{
+  "info": {
+    "name": "AI Driven Query Orchestrator",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "SmartInvoke - Local",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "content-type",
+            "value": "application/json",
+            "disabled": false,
+            "type": "default"
+          },
+          {
+            "key": "user-agent",
+            "value": "vscode-restclient",
+            "disabled": false,
+            "type": "default"
+          }
+        ],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http://localhost:7071/api/SmartInvoke",
+          "protocol": "http",
+          "host": [
+            "localhost:7071"
+          ],
+          "path": [
+            "api",
+            "SmartInvoke"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Description\": \"This query is used to retrieve available flight details based on departure and arrival cities, as well as departure and optional return dates.\",\n  \"Query\": \"Can you provide the available flights between Chicago and San Francisco departing on 2025-03-12?\",\n  \"Language\": \"English\",\n  \"UserId\": \"bruno\",\n  \"IsShowPlanOnly\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "SmartInvoke - Leave Types",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "https://psmartinvoke.azurewebsites.net/api/SmartInvoke",
+          "protocol": "https",
+          "host": [
+            "psmartinvoke",
+            "azurewebsites",
+            "net"
+          ],
+          "path": [
+            "api",
+            "SmartInvoke"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Query\": \"What are the types of leave available?\",\n  \"Language\": \"English\",\n  \"UserId\": \"bruno\",\n  \"IsShowPlanOnly\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "bruno",
+      "event": []
+    },
+    {
+      "name": "SmartInvoke - Flight Details",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "https://psmartinvoke.azurewebsites.net/api/SmartInvoke",
+          "protocol": "https",
+          "host": [
+            "psmartinvoke",
+            "azurewebsites",
+            "net"
+          ],
+          "path": [
+            "api",
+            "SmartInvoke"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"Description\": \"This query is used to retrieve available flight details based on departure and arrival cities, as well as departure and optional return dates.\",\r\n  \"Query\": \"Can you provide the available flights between Chicago and San Francisco departing on 2025-03-12?\",\r\n  \"Language\": \"English\",\r\n  \"UserId\": \"bruno\",\r\n  \"IsShowPlanOnly\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "SmartInvoke - Employee Details",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "https://psmartinvoke.azurewebsites.net/api/SmartInvoke",
+          "protocol": "https",
+          "host": [
+            "psmartinvoke",
+            "azurewebsites",
+            "net"
+          ],
+          "path": [
+            "api",
+            "SmartInvoke"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Description\": \"This query is used to retrieve detailed information about a specific employee by their first name.?\",\n  \"Query\": \"Can you provide the details for the employee named Alice?\",\n  \"FirstName\": \"Alice\",\n  \"Language\": \"English\",\n  \"UserId\": \"bruno\",\n  \"IsShowPlanOnly\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "SmartInvoke - Leave Balance",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "https://psmartinvoke.azurewebsites.net/api/SmartInvoke",
+          "protocol": "https",
+          "host": [
+            "psmartinvoke",
+            "azurewebsites",
+            "net"
+          ],
+          "path": [
+            "api",
+            "SmartInvoke"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Query\": \"Check my leave balance for me EMP9871\",\n  \"Language\": \"English\",\n  \"UserId\": \"bruno\",\n  \"IsShowPlanOnly\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "SmartInvoke - Apply Leave",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "https://psmartinvoke.azurewebsites.net/api/SmartInvoke",
+          "protocol": "https",
+          "host": [
+            "psmartinvoke",
+            "azurewebsites",
+            "net"
+          ],
+          "path": [
+            "api",
+            "SmartInvoke"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Query\": \"Apply leave for EMP4569 starting 2025-03-10 to 2025-03-12\",\n  \"Language\": \"English\",\n  \"UserId\": \"bruno\",\n  \"IsShowPlanOnly\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "SmartInvoke - Apply Leave - Insufficient info",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "https://psmartinvoke.azurewebsites.net/api/SmartInvoke",
+          "protocol": "https",
+          "host": [
+            "psmartinvoke",
+            "azurewebsites",
+            "net"
+          ],
+          "path": [
+            "api",
+            "SmartInvoke"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Query\": \"Apply leave\",\n  \"Language\": \"English\",\n  \"UserId\": \"bruno\",\n  \"IsShowPlanOnly\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "variable": []
+}

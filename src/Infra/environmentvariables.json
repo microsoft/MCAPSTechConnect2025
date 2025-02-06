@@ -35,11 +35,6 @@
       "slotSetting": false
     },
     {
-      "name": "FUNCTIONS_WORKER_RUNTIME",
-      "value": "python",
-      "slotSetting": false
-    },
-    {
       "name": "GPT_35_TURBO",
       "value": "gpt-35-turbo",
       "slotSetting": false
@@ -50,7 +45,7 @@
       "slotSetting": false
     },
     {
-      "name": "GPT-4",
+      "name": "GPT_4",
       "value": "gpt-4o",
       "slotSetting": false
     },
