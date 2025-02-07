@@ -5,27 +5,38 @@ Content-Type: application/json
 {
   "Query": "Apply leave for EMP4569 starting 2025-03-10 to 2025-03-12",
   "Language": "English",
-  "UserId": "httptesting"
+  "UserId": "vscode"
   ,"IsShowPlanOnly": true
 }
 
-### 2. Check Leave Status
+### 2. Apply for leave - insufficient info
+POST http://localhost:7071/api/SmartInvoke
+Content-Type: application/json
+
+{
+  "Query": "Apply leave",
+  "Language": "English",
+  "UserId": "vscode"
+  ,"IsShowPlanOnly": true
+}
+
+### 3. Check Leave Status
 POST http://localhost:7071/api/SmartInvoke
 Content-Type: application/json
 
 {
   "Query": "Check my leave balance for me EMP9871",
   "Language": "English",
-  "UserId": "httptesting"
-  //,"IsShowPlanOnly": true
+  "UserId": "vscode"
+  ,"IsShowPlanOnly": true
 }
 
-### 3. View Leave Types
+### 4. View Leave Types
 POST http://localhost:7071/api/SmartInvoke
 
 {
   "Query": "What are the types of leave available?",
   "Language": "English",
-  "UserId": "httptesting"
-  //,"IsShowPlanOnly": true
+  "UserId": "vscode"
+  ,"IsShowPlanOnly": true
 }

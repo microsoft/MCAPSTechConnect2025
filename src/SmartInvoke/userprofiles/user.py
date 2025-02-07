@@ -8,8 +8,6 @@ from azure.identity.aio import ClientSecretCredential
 from msgraph.graph_service_client import GraphServiceClient  
 from msgraph.generated.models.user import User  
 from msgraph.generated.users.item.user_item_request_builder import UserItemRequestBuilder
-
-from common.cache_utils import BaseCacheWrapper, CacheFactory, CacheType
 from common.functions import generate_cache_key
 
 # Update with the required user profile attributes  
@@ -23,20 +21,9 @@ class UserProfile:
     user_id: str  
     user: Optional[User] = field(default=None, init=False)  
     config: Optional[AppConfig] = field(default=None, init=False)  
-    cache: Optional[BaseCacheWrapper] = field(default=None, init=False)  
 
     def __post_init__(self):  
         self.config :AppConfig = AppConfig.get_instance()  
-        self.cache :Optional[BaseCacheWrapper] = self._initialize_cache()  
-
-    def _initialize_cache(self) -> Optional[BaseCacheWrapper]:  
-        if self.config.USE_CACHE:  
-            return CacheFactory.get_cache(  
-                cachetype=CacheType.REDIS,  
-                redis_host=self.config.REDIS_HOST,  
-                redis_password=os.getenv('REDIS_PASSWORD') if os.getenv('REDIS_PASSWORD') else None,  
-            )  
-        return None  
 
     async def _initialize_credential(self) -> ClientSecretCredential:  
         return ClientSecretCredential(  
@@ -64,13 +51,8 @@ class UserProfile:
 
     async def get_user_details_filter_search_index(self) -> Optional[str]:  
         filter_criteria = []  
-        cache_key = generate_cache_key(self.user_id, "User Profile Search Attribute", self.config.is_permission_check_enabled)  
-        if self.config.is_permission_check_enabled:  
+        if self.config.IS_PERMISSION_CHECK_ENABLED:  
             try:  
-                filter_criteria_string = self.cache.read_from_cache(cache_key) if self.cache else None  
-                if filter_criteria_string:  
-                    filter_criteria = json.loads(filter_criteria_string)  
-                else:  
                     user_details = await self.fetch_user_profile()  
                     if user_details:  
                         user_profile_data = {  
@@ -81,9 +63,6 @@ class UserProfile:
                             f"{attribute} eq '{value}'"  
                             for attribute, value in user_profile_data.items()  
                         ]  
-                        filter_criteria_string = json.dumps(filter_criteria)  
-                        if self.cache:  
-                            self.cache.write_to_cache(cache_key, filter_criteria_string, 60000)  
             except Exception as e:  
                 logging.error(f"Error fetching or caching user details for user_id {self.user_id}: {e}")  
                 raise  

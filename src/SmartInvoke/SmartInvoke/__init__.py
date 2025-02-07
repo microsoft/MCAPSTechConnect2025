@@ -11,9 +11,6 @@ from Invoker import SmartInvoker
 from Config import AppConfig  
 from common import RequestData  
 import re
-
-from common.cache_utils import CacheFactory, CacheType
-from common.chat_session import ChatSession
 from common.functions import count_tokens
 from common.openai_utils import OpenAIUtility
 
@@ -89,16 +86,6 @@ def get_app_config() -> AppConfig:
     """Get application configuration."""  
     return AppConfig.get_instance()  
 
-
-def initialize_cache(appconfig: AppConfig):  
-    """Initialize cache based on application configuration."""  
-    return CacheFactory.get_cache(  
-        cachetype=CacheType.REDIS,  
-        redis_host=appconfig.REDIS_HOST,  
-        redis_password=appconfig.REDIS_PASSWORD,  
-    ) if appconfig.USE_CACHE else None  
-
-
 def initialize_openai_utility(appconfig: AppConfig) -> OpenAIUtility:  
     """Initialize OpenAI utility based on application configuration."""  
     return OpenAIUtility(  
@@ -109,15 +96,6 @@ def initialize_openai_utility(appconfig: AppConfig) -> OpenAIUtility:
         cosmos_key=None,
         cosmos_container_name=None,
         cosmos_database_name=None
-    )  
-
-
-def initialize_chat_session(appconfig: AppConfig) -> ChatSession:  
-    """Initialize chat session based on application configuration."""  
-    return ChatSession(  
-        redis_host=appconfig.REDIS_HOST,  
-        redis_password=appconfig.REDIS_PASSWORD,  
-        user_history_retrieval_limit=10  
     )  
 
 
@@ -137,16 +115,13 @@ async def generate_next_query_suggestion(current_question: str, current_response
     return result  
 
 
-async def handle_request(Invoker: SmartInvoker, request: Dict[str, Any], request_data: RequestData, status_callback, appconfig: AppConfig, chatsession: ChatSession, suggestion_prompt_file_path: str, openai_utility: OpenAIUtility) -> func.HttpResponse:  
+async def handle_request(Invoker: SmartInvoker, request: Dict[str, Any], request_data: RequestData, status_callback, appconfig: AppConfig, suggestion_prompt_file_path: str, openai_utility: OpenAIUtility) -> func.HttpResponse:  
     """Handle the main request logic."""  
     try: 
-        appconfig: AppConfig = get_app_config()  
-        cache = initialize_cache(appconfig)   
+        appconfig: AppConfig = get_app_config()   
         start_time: datetime = datetime.now(timezone.utc)  
-        chatsession.append_to_user_history(user_id=request_data.UserId,question=request_data.Query,answer="Initiating query execution planning")
         status_callback("Initiating query execution planning")
         response, agent_list = await Invoker.handle_request(request, status_callback)  
-        chatsession.append_to_user_history(user_id=request_data.UserId, question=request_data.Query, answer=response)  
         end_time: datetime = datetime.now(timezone.utc)  
 
         duration: float = (end_time - start_time).total_seconds()  
@@ -174,7 +149,7 @@ async def handle_request(Invoker: SmartInvoker, request: Dict[str, Any], request
         if request_data.RequestId == 'acs':
             query_response=await avatar_response(request_data.Query,query_response,openai_utility, request_data)
         else:
-            query_response = await refine_response(request_data, chatsession, openai_utility, query_response)
+            query_response = await refine_response(request_data, openai_utility, query_response)
         
         
         responsejson = {  
@@ -198,26 +173,20 @@ async def handle_request(Invoker: SmartInvoker, request: Dict[str, Any], request
         logging.exception('Error handling request')  
         return func.HttpResponse("Oops! Something went wrong while handling your request. Please try again", status_code=500) 
 
-async def refine_response(request_data, chatsession : ChatSession, openai_utility, query_response):
+async def refine_response(request_data, openai_utility, query_response):
     try:
         messages = [
         {"role": "user", "content": query_response}
         ]
         if count_tokens(messages)<1500:
             logging.info(f'origional resposne :{query_response}')
-            context_domain = chatsession.get_current_domain_context(request_data.UserId)   
-            chat_history=chatsession.get_user_history(request_data.UserId,context_domain)
-            if chat_history:
-                chat_history=f'### Chat History: {chat_history}'
-            else:
-                chat_history="No chat history available ###"
-            query_response = await enhance_response(request_data.Query,query_response,chat_history,openai_utility,request_data)
+            query_response = await enhance_response(request_data.Query,query_response,openai_utility,request_data)
             logging.info(f'enhanced response:{query_response}')
         return query_response 
     except Exception as e:  
         return query_response
 
-async def enhance_response(origional_question: str,response:str,chat_history :str,openai_utility: OpenAIUtility,request_data: RequestData) -> str:
+async def enhance_response(origional_question: str,response:str,openai_utility: OpenAIUtility,request_data: RequestData) -> str:
     try:
         app_config: AppConfig = get_app_config()
         current_dir: str = os.getcwd()  
@@ -226,15 +195,13 @@ async def enhance_response(origional_question: str,response:str,chat_history :st
         system_prompt = (  
             f"Current date is {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"  
             f"user Id is {request_data.UserId}\n"
-            f"{response_enhancement_prompt}{chat_history}\n"  
+            f"{response_enhancement_prompt}\n"  
         ) 
         
         prompt = [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": f"User Query:{origional_question}'### Bot Response:{response}"}
         ]
-        logging.info(f'Waiting for few seconds to avoid too many requests')
-        await asyncio.sleep(5)
         result = await openai_utility.generate_completion(prompt= prompt,gpt_deployment_name= app_config.GPT_DEPLOYMENT_NAME,ai_assistant=app_config.MODULE_NAME,conversation_id=request_data.RequestId, max_token=4048 , request_id = request_data.RequestId)  
         
         return result
@@ -272,9 +239,7 @@ async def Invoker(req: func.HttpRequest) -> func.HttpResponse:
 
     try:  
         appconfig: AppConfig = get_app_config()  
-        cache = initialize_cache(appconfig)  
         openai_utility = initialize_openai_utility(appconfig)  
-        chatsession = initialize_chat_session(appconfig)  
 
         current_dir: str = os.getcwd()  
         suggestion_prompt_file_path: str = os.path.join(current_dir, PROMPT_LIBRARY_DIR, SUGGESTION_PROMPT_FILE)  
@@ -290,17 +255,13 @@ async def Invoker(req: func.HttpRequest) -> func.HttpResponse:
             planner_prompt_file_path=planner_file_path,  
             request_data=request_data,  
             command_prompt_path=command_file_path,  
-            cache=cache,  
-            openai=openai_utility,  
-            chat_session=chatsession  
+            openai=openai_utility
         )  
 
         def status_callback(status: str) -> None:  
-            if cache:  
-                cache.write_to_cache(request_data.RequestId, status)  
             logging.info(f'\n********\nStatus update: {status}\n*******\n')  
 
-        return await handle_request(Invoker, request, request_data, status_callback, appconfig, chatsession, suggestion_prompt_file_path, openai_utility)  
+        return await handle_request(Invoker, request, request_data, status_callback, appconfig, suggestion_prompt_file_path, openai_utility)  
 
     except json.JSONDecodeError as e:  
         logging.error(f'JSON decode error: {e}')  

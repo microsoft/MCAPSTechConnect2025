@@ -6,6 +6,6 @@ Content-Type: application/json
   "Query": "Can you provide the details for the employee named Alice?",
   "FirstName": "Alice",
   "Language": "English",
-  "UserId": "httptesting",
+  "UserId": "vscode",
   "IsShowPlanOnly": true
 }

@@ -6,7 +6,7 @@ import aiofiles
 from pydantic import BaseModel, ValidationError  
 from dataclasses import dataclass  
 from common import (  
-    BaseCacheWrapper, ChatSession, PluginLoader, AgentConfigLoader, ConfigurationError, Context, Task, Plan, PerformanceMonitor  
+    PluginLoader, AgentConfigLoader, ConfigurationError, Context, Task, Plan, PerformanceMonitor  
 )  
 from Config import AppConfig  
 from common import CommandProcessor, CommandProcessorError, RequestData, UserAction
@@ -30,29 +30,27 @@ class SmartInvokerConfig:
 class SmartInvoker:  
     def __init__(  
         self, config: SmartInvokerConfig, agents: Dict[str, Any], planner_prompt: str,   
-        request_data: RequestData, cache: Optional[BaseCacheWrapper] = None,   
-        command_prompt_path: Optional[str] = None, chat_session: Optional[ChatSession] = None,   
+        request_data: RequestData, 
+        command_prompt_path: Optional[str] = None,
         openai_utility: Optional[OpenAIUtility] = None  
     ):  
         self.config = config  
         self.agents = agents  
         self.planner_prompt = planner_prompt  
         self.performance_monitor = PerformanceMonitor()  
-        self.cache = cache  
         self.user_id = request_data.UserId  
         self.user_email = request_data.UserEmail  
         self.query = request_data.Query  
         self.request_id = request_data.RequestId  
         self.command_prompt_path = command_prompt_path  
-        self.chat_session = chat_session  
         self.openai_utility = openai_utility  
         self.is_show_plan_only = request_data.IsShowPlanOnly  
         self.include_user_profile_attributes = False  # Consider passing this from app config or request data  
 
     @classmethod  
     async def create(  
-        cls, request_data: RequestData, cache: BaseCacheWrapper, openai: OpenAIUtility,   
-        chat_session: ChatSession, config_path: Optional[str] = None,   
+        cls, request_data: RequestData, openai: OpenAIUtility,   
+        config_path: Optional[str] = None,   
         planner_prompt_file_path: Optional[str] = None, command_prompt_path: Optional[str] = None  
     ) -> 'SmartInvoker':  
         if not request_data.Query:  
@@ -62,7 +60,7 @@ class SmartInvoker:
         agents = await cls.load_agents(config)  
         planner_prompt = await cls.load_planner_prompt(planner_prompt_file_path)  
 
-        return cls(config, agents, planner_prompt, request_data, cache, command_prompt_path, chat_session, openai)  
+        return cls(config, agents, planner_prompt, request_data, command_prompt_path, openai)  
 
     @staticmethod  
     async def load_config(config_path: Optional[str]) -> SmartInvokerConfig:  
@@ -156,18 +154,10 @@ class SmartInvoker:
             is_permission_check_enabled=True  
         )  
 
-        if self.cache:  
-            cached_result = self.cache.read_from_cache(cache_key)  
-            if cached_result:  
-                status_callback(f"Using cached result for step {task.step}")  
-                return cached_result  
-
         result = await agent.perform_task(context)  
         if not result:
             raise TaskExecutionError(f"We couldn't complete your request because the agent ({task.agent_name}) couldn't retrieve the necessary information in step {task.step}. Please try again or reach out for assistance.")
-        if self.cache:  
-            self.cache.write_to_cache(cache_key, result)  
-
+        
         status_callback(f"Step {task.step} completed")  
         return result  
 
@@ -202,16 +192,6 @@ class SmartInvoker:
             prompt += "\n"  
 
         app_config = AppConfig.get_instance()  
-        chat_session = ChatSession(  
-            redis_host=app_config.REDIS_HOST, redis_password=app_config.REDIS_PASSWORD,   
-            user_history_retrieval_limit=10  
-        )  
-
-        context_domain = chat_session.get_current_domain_context(self.user_id)  
-        recent_chat_history = chat_session.get_user_history(self.user_id, context_domain)  
-
-        if recent_chat_history:  
-            prompt += f'\nAlso below is the recent chat history for the user:\n{recent_chat_history}\n'  
 
         messages = [  
             {"role": "system", "content": prompt},  
@@ -284,7 +264,6 @@ class SmartInvoker:
                     resolved_task.set_result(result)  
                     context.data['result'] = result  # Update context with the result of the task  
                     completed_tasks[resolved_task.step] = result
-                    self.chat_session.append_to_user_history_system_message(self.user_id,"Task Execution Completed", f"Step {resolved_task.get_step()} - Task {resolved_task.agent_name} Complete.Task Execution Result: {result}")
                     logging.info(f"Step {resolved_task.get_step()} - Task {resolved_task.agent_name} .result: {result}") 
                     
                     if task.agent_name == "UserProxyAgent":
@@ -344,7 +323,7 @@ class SmartInvoker:
         """Process the command."""  
         command_processor = CommandProcessor(  
             request_id=self.request_id, user_id=self.user_id, user_request=self.query,   
-            prompt_library_path=self.command_prompt_path, chat_session=self.chat_session,   
+            prompt_library_path=self.command_prompt_path,   
             openai_utility=self.openai_utility  
         )  
         return await command_processor.validate_and_extract_command()  
@@ -360,7 +339,6 @@ class SmartInvoker:
             status_callback ("🔄 Loading agents")
             execution_plan = await self.generate_plan()  
             status_callback("✅ Execution plan generated")
-            self.chat_session.append_to_user_history_system_message(self.user_id,"Query Execution Plan Generated", str(execution_plan))
             if isinstance(execution_plan, UserAction):  
                 return execution_plan.Message, None
 
