@@ -4,7 +4,6 @@
 
 azure-functions
 aiohttp
-redis
 openai
 circuitbreaker
 tabulate

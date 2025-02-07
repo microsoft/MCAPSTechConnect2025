@@ -5,9 +5,7 @@ from dataclasses import dataclass, field
 from typing import Dict
 from contextlib import asynccontextmanager
 import asyncio
-
 from Config.configuration import AppConfig
-from common.chat_session import ChatSession
 from common.openai_utils import OpenAIUtility
 
 
@@ -67,12 +65,11 @@ class CommandProcessor:
 
     __slots__ = ('request_id','user_id', 'user_request', 'prompt_library_path', 'chat_session', 'openai_utility')
 
-    def __init__(self,request_id:str, user_id: str, user_request: str, prompt_library_path: str, chat_session: ChatSession, openai_utility: OpenAIUtility = None):
+    def __init__(self,request_id:str, user_id: str, user_request: str, prompt_library_path: str, openai_utility: OpenAIUtility = None):
         self.user_id = user_id
         self.request_id = request_id
         self.user_request = user_request
         self.prompt_library_path = prompt_library_path
-        self.chat_session = chat_session
         self.openai_utility = openai_utility or OpenAIUtility()
 
     def __str__(self):
@@ -165,13 +162,7 @@ class CommandProcessor:
             str: Response message after setting the context.
         """
         try:
-            self.chat_session.clear_chat_history(self.user_id)
             answer = CommandMessages.CONTEXT_SET.format(context=context)
-            current_context=self.chat_session.get_current_domain_context(user_id=self.user_id)
-            if current_context==context:
-                return None
-            self.chat_session.append_to_user_history(user_id=self.user_id, question=self.user_request, answer=answer)
-            self.chat_session.set_current_domain_context(user_id=self.user_id, context=context)
             return answer
 
         except Exception as e:

@@ -9,7 +9,7 @@ class AppConfig(BaseAppConfig):
     
     @property  
     def OPENAI_API_BASE(self) -> str:  
-        return self.load_config_value('OPENAI_API_BASE', "https://westus.api.cognitive.microsoft.com/")  
+        return self.load_config_value('OPENAI_API_BASE', "https://mcapsopenaiinstance.api.cognitive.microsoft.com/")  
   
     @property  
     def OPENAI_API_VERSION(self) -> str:  
@@ -45,23 +45,7 @@ class AppConfig(BaseAppConfig):
   
     @property  
     def IS_PERMISSION_CHECK_ENABLED(self) -> bool:  
-        return self.load_bool_config_value('IS_PERMISSION_CHECK_ENABLED', False)  
-  
-    @property  
-    def CACHE_TYPE(self) -> str:  
-        return self.load_config_value('CACHE_TYPE', "redis")  
-  
-    @property  
-    def REDIS_HOST(self) -> str:  
-        return self.load_config_value('REDIS_HOST', "")  
-  
-    @property  
-    def REDIS_PASSWORD(self) -> str:  
-        return self.load_config_value('REDIS_PASSWORD', None)   
-    
-    @property  
-    def USER_HISTORY_RETRIEVAL_LIMIT(self) -> int:  
-        return int(self.load_config_value('USER_HISTORY_RETRIEVAL_LIMIT', 10))  
+        return self.load_bool_config_value('IS_PERMISSION_CHECK_ENABLED', False)     
   
     @property
     def GENERATE_QUERY_SUGGESTIONS(self) -> bool:
