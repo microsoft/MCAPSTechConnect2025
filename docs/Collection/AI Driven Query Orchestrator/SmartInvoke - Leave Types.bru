@@ -1,0 +1,20 @@
+meta {
+  name: SmartInvoke - Leave Types
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://psmartinvoke.azurewebsites.net/api/SmartInvoke
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "Query": "What are the types of leave available?",
+    "Language": "English",
+    "UserId": "bruno",
+    "IsShowPlanOnly": true
+  }
+}

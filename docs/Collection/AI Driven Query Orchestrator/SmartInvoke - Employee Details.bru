@@ -1,0 +1,21 @@
+meta {
+  name: SmartInvoke - Employee Details
+  type: http
+  seq: 5
+}
+
+post {
+  url: https://psmartinvoke.azurewebsites.net/api/SmartInvoke
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "Query": "Can you provide the details for the employee named Alice?",
+    "FirstName": "Alice",
+    "Language": "English",
+    "UserId": "bruno",
+    "IsShowPlanOnly": true
+  }
+}

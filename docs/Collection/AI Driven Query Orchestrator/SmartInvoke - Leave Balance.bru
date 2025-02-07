@@ -1,0 +1,20 @@
+meta {
+  name: SmartInvoke - Leave Balance
+  type: http
+  seq: 6
+}
+
+post {
+  url: https://psmartinvoke.azurewebsites.net/api/SmartInvoke
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "Query": "Check my leave balance for me EMP9871",
+    "Language": "English",
+    "UserId": "bruno",
+    "IsShowPlanOnly": true
+  }
+}
