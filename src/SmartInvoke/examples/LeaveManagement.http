@@ -17,7 +17,7 @@ Content-Type: application/json
   "Query": "Check my leave balance for me EMP9871",
   "Language": "English",
   "UserId": "httptesting"
-  ,"IsShowPlanOnly": true
+  //,"IsShowPlanOnly": true
 }
 
 ### 3. View Leave Types
