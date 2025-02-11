@@ -1,5 +1,5 @@
 ### 1. Apply for Leave
-POST http://localhost:7071/api/SmartInvoke
+POST https://psmartinvoke.azurewebsites.net/api/SmartInvoke
 Content-Type: application/json
 
 {
@@ -10,7 +10,7 @@ Content-Type: application/json
 }
 
 ### 2. Apply for leave - insufficient info
-POST http://localhost:7071/api/SmartInvoke
+POST https://psmartinvoke.azurewebsites.net/api/SmartInvoke
 Content-Type: application/json
 
 {
@@ -21,7 +21,7 @@ Content-Type: application/json
 }
 
 ### 3. Check Leave Status
-POST http://localhost:7071/api/SmartInvoke
+POST https://psmartinvoke.azurewebsites.net/api/SmartInvoke
 Content-Type: application/json
 
 {
@@ -32,7 +32,7 @@ Content-Type: application/json
 }
 
 ### 4. View Leave Types
-POST http://localhost:7071/api/SmartInvoke
+POST https://psmartinvoke.azurewebsites.net/api/SmartInvoke
 
 {
   "Query": "What are the types of leave available?",

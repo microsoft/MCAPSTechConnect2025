@@ -1,4 +1,4 @@
-POST http://localhost:7071/api/SmartInvoke
+POST https://psmartinvoke.azurewebsites.net/api/SmartInvoke
 Content-Type: application/json
 
 {
