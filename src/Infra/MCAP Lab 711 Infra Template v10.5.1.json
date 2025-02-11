@@ -1511,26 +1511,6 @@
                     "functionAppScaleLimit": 100,
                     "minimumElasticInstanceCount": 0
                 },
-                "functionAppConfig": {
-                    "deployment": {
-                        "storage": {
-                            "type": "blobcontainer",
-                            "value": "[concat('https://', parameters('storageAccounts_resourcegroup1bfc4_name'), concat('.blob.core.windows.net/app-package-', parameters('sites_agent147986904_name'), '-5438ff2'))]",
-                            "authentication": {
-                                "type": "storageaccountconnectionstring",
-                                "storageAccountConnectionStringName": "DEPLOYMENT_STORAGE_CONNECTION_STRING"
-                            }
-                        }
-                    },
-                    "runtime": {
-                        "name": "python",
-                        "version": "3.11"
-                    },
-                    "scaleAndConcurrency": {
-                        "maximumInstanceCount": 100,
-                        "instanceMemoryMB": 4096
-                    }
-                },
                 "scmSiteAlsoStopped": false,
                 "clientAffinityEnabled": false,
                 "clientCertEnabled": false,
@@ -1591,26 +1571,6 @@
                     "http20Enabled": false,
                     "functionAppScaleLimit": 100,
                     "minimumElasticInstanceCount": 0
-                },
-                "functionAppConfig": {
-                    "deployment": {
-                        "storage": {
-                            "type": "blobcontainer",
-                            "value": "[concat('https://', parameters('storageAccounts_resourcegroup1bfc4_name'), concat('.blob.core.windows.net/app-package-', parameters('sites_agent247986904_name'), '-4acc5df'))]",
-                            "authentication": {
-                                "type": "storageaccountconnectionstring",
-                                "storageAccountConnectionStringName": "DEPLOYMENT_STORAGE_CONNECTION_STRING"
-                            }
-                        }
-                    },
-                    "runtime": {
-                        "name": "python",
-                        "version": "3.11"
-                    },
-                    "scaleAndConcurrency": {
-                        "maximumInstanceCount": 100,
-                        "instanceMemoryMB": 4096
-                    }
                 },
                 "scmSiteAlsoStopped": false,
                 "clientAffinityEnabled": false,
@@ -1673,26 +1633,6 @@
                     "functionAppScaleLimit": 100,
                     "minimumElasticInstanceCount": 0
                 },
-                "functionAppConfig": {
-                    "deployment": {
-                        "storage": {
-                            "type": "blobcontainer",
-                            "value": "[concat('https://', parameters('storageAccounts_resourcegroup1bfc4_name'), concat('.blob.core.windows.net/app-package-', parameters('sites_agent347986904_name'), '-4acc5df'))]",
-                            "authentication": {
-                                "type": "storageaccountconnectionstring",
-                                "storageAccountConnectionStringName": "DEPLOYMENT_STORAGE_CONNECTION_STRING"
-                            }
-                        }
-                    },
-                    "runtime": {
-                        "name": "python",
-                        "version": "3.11"
-                    },
-                    "scaleAndConcurrency": {
-                        "maximumInstanceCount": 100,
-                        "instanceMemoryMB": 4096
-                    }
-                },
                 "scmSiteAlsoStopped": false,
                 "clientAffinityEnabled": false,
                 "clientCertEnabled": false,
@@ -1753,26 +1693,6 @@
                     "http20Enabled": false,
                     "functionAppScaleLimit": 100,
                     "minimumElasticInstanceCount": 0
-                },
-                "functionAppConfig": {
-                    "deployment": {
-                        "storage": {
-                            "type": "blobcontainer",
-                            "value": "[concat('https://', parameters('storageAccounts_resourcegroup1bfc4_name'), concat('.blob.core.windows.net/app-package-', parameters('sites_si47986905_name'), '-8fa0130'))]",
-                            "authentication": {
-                                "type": "storageaccountconnectionstring",
-                                "storageAccountConnectionStringName": "DEPLOYMENT_STORAGE_CONNECTION_STRING"
-                            }
-                        }
-                    },
-                    "runtime": {
-                        "name": "python",
-                        "version": "3.11"
-                    },
-                    "scaleAndConcurrency": {
-                        "maximumInstanceCount": 100,
-                        "instanceMemoryMB": 4096
-                    }
                 },
                 "scmSiteAlsoStopped": false,
                 "clientAffinityEnabled": false,
